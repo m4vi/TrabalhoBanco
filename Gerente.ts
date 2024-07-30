@@ -51,7 +51,7 @@ export class PF{
             contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
         }
         else {
-            console.log("\nSaldo insuficiente\n");
+            console.log("\n insuficiente\n");
         }
     }
 }
