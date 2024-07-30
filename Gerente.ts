@@ -53,6 +53,13 @@ export class PF{
         else {
             console.log("\n insuficiente\n");
         }
+
+    }
+
+    public deposito(contasPF[]:PF,indice:number,valor:number){
+        if(!isNaN(valor) && valor > 0 && contasPF[indice]){
+            contasPF[indice].saldo += valor; 
+        }
     }
 }
 
