@@ -59,6 +59,9 @@ export class PF{
     public deposito(contasPF[]:PF,indice:number,valor:number){
         if(!isNaN(valor) && valor > 0 && contasPF[indice]){
             contasPF[indice].saldo += valor; 
+        } else{
+            console.log("Deposito não autorizado");
+            
         }
     }
 }
@@ -113,7 +116,9 @@ export class PJ
     }
     set saldoPJ(saldoPJ: number){
         this.saldo;
-    }  
+    }
+    
+    
 }
 
 export class Gerente{
