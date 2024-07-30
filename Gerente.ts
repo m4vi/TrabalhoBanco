@@ -79,7 +79,22 @@ export class Gerente{
     public adicionarContaPJ(numeroConta: number): void {
         this._contasPJ.push(numeroConta);
     }
-
+    
+    
+    // VERSÃO ADPATADA DO PROFESSOR: TESTAR!
+    removerContaPF(contasPF: PF){
+        let index = this._contasPF.indexOf(contasPF);
+        if(index >= 0){
+            this._contasPF.splice(index, 1);
+        }        
+    }
+    removerContapj(contasPJ: PJ){
+        let index = this._contasPJ.indexOf(contasPJ);
+        if(index >= 0){
+            this._contasPJ.splice(index, 1);
+        }        
+    }
+    /* Versão Chat GPT
     public removerContaPF(numeroConta: number): void {
         const novoArray: number[] = [];
         for (let i = 0; i < this._contasPF.length; i++) {
@@ -90,14 +105,6 @@ export class Gerente{
         this._contasPF = novoArray;
     }
 
-    /*
-    removerCompositor(compositor: Compositor){
-        let index = this._compositores.indexOf(compositor);
-        if(index >= 0){
-            this._compositores.splice(index, 1);
-        }        
-    }
-    */
     public removerContaPJ(numeroConta: number): void {
         const novoArray: number[] = [];
         for (let i = 0; i < this._contasPJ.length; i++) {
@@ -106,6 +113,6 @@ export class Gerente{
             }
         }
         this._contasPJ = novoArray;
-    }
+    }*/
 
 }
