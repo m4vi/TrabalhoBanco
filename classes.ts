@@ -115,7 +115,7 @@ export class Gerente{
     private _senha: number;
     private _numeroContato: number;
     private _contasPF: PF[];
-    private _contasPF: PJ[];
+    private _contasPJ: PJ[];
 
     constructor(nome: string, email: string, senha: number, numeroContato: number, contasPF: number[]){
         this._nome = nome;
@@ -161,11 +161,19 @@ export class Gerente{
         return this._contasPF[numeroConta];
     }
 
-    public adicionarConta(numeroConta: number): void {
+    public adicionarContaPF(numeroConta: number): void {
         this._contasPF.push(numeroConta);
     }
 
-    public removerConta(numeroConta: number): void {
+    public getContaPJ(numeroConta: number): number {
+        return this._contasPF[numeroConta];
+    }
+
+    public adicionarContaPJ(numeroConta: number): void {
+        this._contasPJ.push(numeroConta);
+    }
+
+    public removerContaPF(numeroConta: number): void {
         const novoArray: number[] = [];
         for (let i = 0; i < this._contasPF.length; i++) {
             if (this._contasPF[i] !== numeroConta) {
@@ -173,6 +181,16 @@ export class Gerente{
             }
         }
         this._contasPF = novoArray;
-    }
+    }
+
+    public removerContaPJ(numeroConta: number): void {
+        const novoArray: number[] = [];
+        for (let i = 0; i < this._contasPJ.length; i++) {
+            if (this._contasPJ[i] !== numeroConta) {
+                novoArray.push(this._contasPJ[i]);
+            }
+        }
+        this._contasPJ = novoArray;
+    }
 
 }
