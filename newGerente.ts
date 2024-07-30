@@ -47,8 +47,6 @@ export default class Gerente{
     public setNumeroContato(numeroContato: number): void {
         this._numeroContato = numeroContato;
     }
-
-
 }
 
 export {};
