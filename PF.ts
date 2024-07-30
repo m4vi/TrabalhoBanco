@@ -89,6 +89,25 @@ export class PF {
             console.log(`Entrada ${index + 1}: ${valor}`);
         });
     }
+
+    public emprestimoPF(contasPF: PF[], indice: number, pedido: number, parcelas: number): void {
+            
+        if ((contasPF[indice].saldo) * 0.75 >= pedido) {
+            pedido = pedido * 1.3;
+            if (parcelas > 0) {
+                pedido = pedido * (parcelas * 1.05);
+                let val = pedido/parcelas;
+                console.log(`Numero de parcelas {${parcelas}}. Valor de cada parcela: ${val}`);
+            }
+        console.log(`O empréstimo totalizará: ${pedido}`);
+        } else {
+            console.log("Provavel não aceitação de sua proposta;\n");
+            console.log("Motivo: saldo em conta muito baixo.");
+        }
+    }
+    
+    
+
 }
 
 export {};

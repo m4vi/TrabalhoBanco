@@ -89,8 +89,8 @@ var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
 var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-//------------------------------------------------------------//
-arraycontasPJ.push(user1, user2);
+//-----------------------------------------------------------0
+-arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5);
 //------------------------------------------------------------//
@@ -121,8 +121,7 @@ do {
             "| 2 Depositar\n" +
             "| 3 Extrato\n" +
             "| 4 Transferencia\n" +
-            "| 5 Emprestimo\n" +
-            "| 6 Excluir conta\n" +
+            "| 5 Simular emprestimo\n" +
             "| 0 Voltar\n" +
             "----------------------------");
         escolha = +prompt('Escolha: >> ');
@@ -218,13 +217,11 @@ do {
             case 5:
                 //emprestimo
                 if (tipoConta === "PF") {
-                }
-                else if (tipoConta === "PJ") {
-                }
-                break;
-            case 6:
-                //excluir
-                if (tipoConta === "PF") {
+                    var parcelas = void 0;
+                    var pedido = void 0;
+                    pedido = +prompt("Digite o valor a ser simulado >> ");
+                    parcelas = +prompt("Digite quantas parcelas >> ");
+                    arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
                 }
                 else if (tipoConta === "PJ") {
                 }

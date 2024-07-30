@@ -93,6 +93,20 @@ var PF = /** @class */ (function () {
             console.log("Entrada ".concat(index + 1, ": ").concat(valor));
         });
     };
+    PF.prototype.emprestimoPF = function (contasPF, indice, pedido, parcelas) {
+        if ((contasPF[indice].saldo) * 0.75 >= pedido) {
+            pedido = pedido * 1.3;
+            if (parcelas > 0) {
+                pedido = pedido * (parcelas * 1.05);
+                var val = pedido / parcelas;
+                console.log("Numero de parcelas {".concat(parcelas, "}. Valor de cada parcela: ").concat(val));
+            }
+            console.log("O empr\u00E9stimo totalizar\u00E1: ".concat(pedido));
+        }
+        else {
+            console.log("Condição if não satisfeita.");
+        }
+    };
     return PF;
 }());
 exports.PF = PF;

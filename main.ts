@@ -108,7 +108,8 @@ let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 
 let user5: Gerente= new Gerente("Pintoncio da silva","pindamonhaga@asp.com.br",12345678,40028922);
-//------------------------------------------------------------//
+//-----------------------------------------------------------0
+-//
 
 arraycontasPJ.push(user1,user2);
 arraycontasPF.push(user3,user4);
@@ -150,8 +151,7 @@ do{
             "| 2 Depositar\n" +
             "| 3 Extrato\n" +
             "| 4 Transferencia\n" +
-            "| 5 Emprestimo\n" +
-            "| 6 Excluir conta\n" +
+            "| 5 Simular emprestimo\n" +
             "| 0 Voltar\n" +
             "----------------------------");
             
@@ -271,24 +271,16 @@ do{
             case 5:
                 //emprestimo
                 if(tipoConta==="PF"){
-    
-    
-                }else if(tipoConta==="PJ"){
-    
-            }
-    
-    
-                break;
-    
-            case 6:
-                //excluir
-                if(tipoConta==="PF"){
+
+                let parcelas : number;    
+                let pedido : number;
+                pedido = +prompt("Digite o valor a ser simulado >> ");
+                parcelas = +prompt("Digite quantas parcelas >> ");
+                arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
     
                 }else if(tipoConta==="PJ"){
     
             }
-    
-    
                 break;
     
             case 0:
