@@ -7,9 +7,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var prompt_sync_1 = __importDefault(require("prompt-sync")); //importa um módulo que captura entradas do usuário
 var PF_1 = require("./PF");
 var PJ_1 = require("./PJ");
-//import {Gerente} from "./Gerente";
+var newGerente_1 = __importDefault(require("./newGerente"));
 var prompt = (0, prompt_sync_1.default)(); //cria uma instancia do prompt-sync
-function cadastro() {
+function acessoMembros(arrayGerentes) {
+    do {
+        var usuario = prompt("Digite seu email: ");
+        var tamanho = usuario.length;
+        var senha = parseInt(prompt("Digite sua senha: "));
+        var procuraConta = function (email, arrayGerentes) {
+            return arrayGerentes.findIndex(function (gerente) { return gerente.getEmail() === email; });
+        };
+        var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
+        console.log(arrayGerentes[indiceUsuarioMembro]);
+        var inputSenha = parseInt(prompt("Senha da conta: "));
+        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha) {
+            console.log("\nSenha incorreta, operação reiniciada\n");
+            continue;
+        }
+    } while (true);
 }
 function login(arraycontasPF, arraycontasPJ) {
     do {
@@ -61,6 +76,8 @@ function login(arraycontasPF, arraycontasPJ) {
 //main
 var arraycontasPF = [];
 var arraycontasPJ = [];
+var arrayGerentes = [];
+//------------------------------------------------------------//
 var tipoConta = '\0';
 var indiceConta = 0;
 var valorTransferecia = 0;
@@ -69,26 +86,25 @@ var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
-console.log(user1);
-console.log(user4);
-//lembrar usar push
-arraycontasPF.push(user3, user4);
+var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
+//------------------------------------------------------------//
 arraycontasPJ.push(user1, user2);
+arraycontasPF.push(user3, user4);
+arrayGerentes.push(user5);
 //------------------------------------------------------------//
 do {
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Cadastrar\n" +
-        "|  2 Login\n" +
+        "|  1 Login\n" +
+        "|  2 Sou membro\n" +
         "|  0 Sair");
     var escolha1 = parseInt(prompt("Digite a opção desejada: "));
     if (escolha1 === 1) {
-        cadastro();
+        login(arraycontasPF, arraycontasPJ);
         break;
     }
     else if (escolha1 === 2) {
-        login(arraycontasPF, arraycontasPJ);
-        break;
+        acessoMembros(arrayGerentes);
     }
     else if (escolha1 === 0) {
         process.exit(0); // encerra o processo com código de status 0
@@ -98,32 +114,6 @@ do {
     }
     break;
 } while (true);
-/*
-do{
-
-    console.log("-------------------------------------\n" +
-        "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Cadastrar\n"+
-        "|  2 Login\n"+
-        "|  0 Sair");
-
-
-    let escolha1:number=parseInt(prompt("Digite a opção desejada: "));
-
-    if(escolha1===1){
-        cadastro();
-        break;
-    }else if(escolha1===2) {
-        login(arraycontasPF, arraycontasPJ);
-        break;
-    }else if(escolha1===0){
-        process.exit(0); // encerra o processo com código de status 0
-    }else{
-        console.log("\nFizeste cagada colega\n");
-    }
-    break;
-}while(true);
-*/
 var escolha;
 do {
     console.log("----------------------------\n" +

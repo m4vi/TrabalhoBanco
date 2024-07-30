@@ -2,12 +2,33 @@
 import promptSync from 'prompt-sync'; //importa um módulo que captura entradas do usuário
 import {PF} from "./PF";
 import {PJ} from "./PJ";
-import {Gerente} from "./Gerente";
+import Gerente from "./newGerente";
 
 const prompt = promptSync(); //cria uma instancia do prompt-sync
 
-function acessoMembros(){
+function acessoMembros(arrayGerentes: Gerente[]){
+    do{
+        let usuario: string= prompt("Digite seu email: ");
+        let tamanho: number = usuario.length;
 
+        let senha: number=parseInt(prompt("Digite sua senha: "));
+
+        const procuraConta = (email: string, arrayGerentes: Gerente[]): number => {
+            return arrayGerentes.findIndex((gerente) => gerente.getEmail() === email);
+        };
+
+        let indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
+        console.log(arrayGerentes[indiceUsuarioMembro]);
+
+
+        let inputSenha = parseInt(prompt("Senha da conta: "));
+        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha) {
+            console.log("\nSenha incorreta, operação reiniciada\n");
+            continue;
+        }
+
+
+    }while(true);
 }
 
 
@@ -69,6 +90,8 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 const arraycontasPF: PF[] = [];
 const arraycontasPJ: PJ[] = [];
 const arrayGerentes: Gerente[]=[];
+//------------------------------------------------------------//
+
 var tipoConta:string='\0';
 var indiceConta:number = 0;
 let valorTransferecia:number=0;
@@ -80,14 +103,12 @@ let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 
+let user5: Gerente= new Gerente("Pintoncio da silva","pindamonhaga@asp.com.br",12345678,40028922);
 //------------------------------------------------------------//
 
-console.log(user1);
-console.log(user4);
-//lembrar usar push
-
-arraycontasPF.push(user3,user4);
 arraycontasPJ.push(user1,user2);
+arraycontasPF.push(user3,user4);
+arrayGerentes.push(user5);
 
 //------------------------------------------------------------//
 
@@ -99,7 +120,7 @@ do{
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
         "|  1 Login\n"+
-        "|  2 Sou membro"+
+        "|  2 Sou membro\n"+
         "|  0 Sair");
 
 
@@ -110,7 +131,7 @@ do{
         break;
     }
     else if(escolha1===2){
-        //acesso membros
+        acessoMembros(arrayGerentes);
     }else if(escolha1===0){
         process.exit(0); // encerra o processo com código de status 0
     }else{

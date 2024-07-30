@@ -84,13 +84,13 @@ var PJ = /** @class */ (function () {
         console.log("Nome: ".concat(contasPJ[indice].nomeTitular));
         console.log("Saldo: ".concat(contasPJ[indice].saldo));
         console.log("N\u00FAmero Conta: ".concat(contasPJ[indice].numeroConta));
-        console.log("Saques Realizados:");
+        console.log("Saídas Realizados:");
         contasPJ[indice]._extratoSaque.forEach(function (valor, index) {
-            console.log("Saque ".concat(index + 1, ": ").concat(valor));
+            console.log("Sa\u00EDda ".concat(index + 1, ": ").concat(valor));
         });
-        console.log("Depósitos Realizados:");
+        console.log("Entradas Realizados:");
         contasPJ[indice]._extratoDeposito.forEach(function (valor, index) {
-            console.log("Dep\u00F3sito ".concat(index + 1, ": ").concat(valor));
+            console.log("Entrada ".concat(index + 1, ": ").concat(valor));
         });
     };
     return PJ;

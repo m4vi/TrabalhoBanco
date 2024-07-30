@@ -57,13 +57,13 @@ export class Gerente{
       //  this._contasPF.push(numeroConta);
     //}
 
-    public getContaPJ(numeroConta: number): number {
+    public getContaPJ(numeroConta: number): PF {
         return this._contasPF[numeroConta];
     }
 
-    public adicionarContaPJ(numeroConta: number): void {
-        this._contasPJ.push(numeroConta);
-    }
+    //public adicionarContaPJ(numeroConta: number): void {
+      //  this._contasPJ.push(numeroConta);
+    //}
     
 
     public removerContaPF(numeroConta: number): void {
@@ -125,3 +125,4 @@ export class Gerente{
     }
 
 }
+*/

@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Gerente = void 0;
 var Gerente = /** @class */ (function () {
-    function Gerente(nome, email, senha, numeroContato, contasPF) {
+    function Gerente(nome, email, senha, numeroContato) {
+        this._contasPF = [];
+        this._contasPJ = [];
         this._nome = nome;
         this._email = email;
         this._senha = senha;
         this._numeroContato = numeroContato;
-        this._contasPF = contasPF;
     }
     Gerente.prototype.getNome = function () {
         return this._nome;
@@ -33,18 +34,16 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.setNumeroContato = function (numeroContato) {
         this._numeroContato = numeroContato;
     };
-    Gerente.prototype.getContaPF = function (numeroConta) {
-        return this._contasPF[numeroConta];
-    };
-    Gerente.prototype.adicionarContaPF = function (numeroConta) {
-        this._contasPF.push(numeroConta);
-    };
+    //public adicionarContaPF(PFconta:{nomeTitular:string,cpf:number,senha:number,numeroConta:number,saldo:number,extratoSaque:number[],extratoDeposito:number}){} 
+    //public adicionarContaPF(numeroConta: number): void {
+    //  this._contasPF.push(numeroConta);
+    //}
     Gerente.prototype.getContaPJ = function (numeroConta) {
         return this._contasPF[numeroConta];
     };
-    Gerente.prototype.adicionarContaPJ = function (numeroConta) {
-        this._contasPJ.push(numeroConta);
-    };
+    //public adicionarContaPJ(numeroConta: number): void {
+    //  this._contasPJ.push(numeroConta);
+    //}
     Gerente.prototype.removerContaPF = function (numeroConta) {
         var novoArray = [];
         for (var i = 0; i < this._contasPF.length; i++) {
@@ -101,4 +100,4 @@ public removerContaPJ(numeroConta: number): void {
 }
 
 }
- 
+*/ 
