@@ -17,15 +17,18 @@ function acessoMembros(arrayGerentes: Gerente[]){
             return arrayGerentes.findIndex((gerente) => gerente.getEmail() === email);
         };
 
-        let indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
+        indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
 
 
         let inputSenha = parseInt(prompt("Senha da conta: "));
-        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha) {
-            console.log("\nSenha incorreta, operação reiniciada\n");
+
+        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha || indiceUsuarioMembro==-1) {
+            console.log("\nUsuário ou senha inválidos, operação reiniciada\n");
             continue;
         }
+
+        break;
 
 
     }while(true);
@@ -94,6 +97,7 @@ const arrayGerentes: Gerente[]=[];
 
 var tipoConta:string='\0';
 var indiceConta:number = 0;
+var indiceUsuarioMembro:number=0;
 let valorTransferecia:number=0;
 //------------------------------------------------------------//
 
@@ -128,6 +132,7 @@ do{
 
     if(escolha1===1){
         login(arraycontasPF, arraycontasPJ);
+
         break;
     }
     else if(escolha1===2){
@@ -141,6 +146,9 @@ do{
 }while(true);
 
 let escolha: number;
+
+
+
 
 
 do {
