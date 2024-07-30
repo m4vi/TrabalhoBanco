@@ -2,12 +2,12 @@
 import promptSync from 'prompt-sync'; //importa um módulo que captura entradas do usuário
 import {PF} from "./PF";
 import {PJ} from "./PJ";
-import {Gerente} from "./Gerente";
+//import {Gerente} from "./Gerente";
 
 const prompt = promptSync(); //cria uma instancia do prompt-sync
 
 function cadastro():void{
-    
+
 }
 
 
@@ -20,17 +20,17 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
         if (tamanho == 11) {
             tipoConta = "PF";
 
-            const procuraConta = (cpf: number): number => {
+            const procuraConta = (cpf: number,arraycontas[]:PF): number => {
                 return arraycontasPF.findIndex((PF) => PF.cpf === cpf);
             };
 
-            indiceConta = procuraConta(usuario);
+            indiceConta = procuraConta(usuario,arraycontasPF);
 
             if (indiceConta == -1) {
                 console.log("\nConta não existente\n");
                 continue;
             } else {
-                let inputSenha = prompt("Senha da conta: ");
+                let inputSenha = parseInt(prompt("Senha da conta: "));
                 if (arraycontasPF[indiceConta].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
@@ -40,17 +40,17 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
         } else if (tamanho == 14) {
             tipoConta = "PJ";
 
-            const procuraConta = (cnpj: number): number => {
+            const procuraConta = (cnpj: number,arraycontas:PF[]): number => {
                 return arraycontasPJ.findIndex((PJ) => PJ.cnpj === cnpj);
             };
 
-            indiceConta = procuraConta(usuario);
+            indiceConta = procuraConta(usuario,arraycontasPJ);
 
             if (indiceConta == -1) {
                 console.log("\nConta não existente\n");
                 continue;
             } else {
-                let inputSenha = prompt("Senha da conta: ");
+                let inputSenha = parseInt(prompt("Senha da conta: "));
                 if (arraycontasPJ[indiceConta].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
@@ -69,8 +69,8 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 
 const arraycontasPF: PF[] = [];
 const arraycontasPJ: PJ[] = [];
-var tipoConta: string = '';
-var indiceConta: number = -1;
+var tipoConta:string='\0';
+var indiceConta:number;
 //------------------------------------------------------------//
 
 let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
@@ -82,9 +82,6 @@ console.log(user1);
 console.log(user4);
 //lembrar usar push
 
-arraycontasPF.push(user3,user4);
-arraycontasPJ.push(user1,user2);
-
 //------------------------------------------------------------//
 
 
@@ -92,13 +89,13 @@ arraycontasPJ.push(user1,user2);
 
 do{
 
-console.log("-------------------------------------\n" +
-    "|  Bem vindo ao Banco Aspili Getas  |\n" +
-    "|  1 Cadastrar\n"+
-    "|  2 Login\n"+
-    "|  0 Sair");
+    console.log("-------------------------------------\n" +
+        "|  Bem vindo ao Banco Aspili Getas  |\n" +
+        "|  1 Cadastrar\n"+
+        "|  2 Login\n"+
+        "|  0 Sair");
 
-    
+
     let escolha1:number=parseInt(prompt("Digite a opção desejada: "));
 
     if(escolha1===1){
@@ -115,97 +112,4 @@ console.log("-------------------------------------\n" +
 
 }while(true);
 
-
-
-let escolha: number;
-
-
-do {
-    console.log("----------------------------\n" + 
-        "| 1 Sacar dinheiro\n" + 
-        "| 2 Depositar\n" +
-        "| 3 Extrato\n" +
-        "| 4 Transferencia\n" +
-        "| 5 Emprestimo\n" +
-        "| 6 Excluir conta\n" + 
-        "| 0 Voltar\n" +
-        "----------------------------");
-
-    escolha = +prompt('Escolha: >> ');
-
-    switch (escolha) {
-        case 1:
-            //saque
-            if(tipoConta==="PF"){
-                saque(arraycontasPF,)
-            }else(tipoConta==="PJ"){
-
-            }
-
-        break;
-
-        case 2:
-            //depositar
-            if(tipoConta==="PF"){
-
-            }else(tipoConta==="PJ"){
-
-        }
-
-
-            break;
-
-        case 3:
-            //extrato
-            if(tipoConta==="PF"){
-
-            }else(tipoConta==="PJ"){
-
-        }
-
-
-            break;
-
-        case 4:
-            //transferencia
-            if(tipoConta==="PF"){
-
-            }else(tipoConta==="PJ"){
-
-        }
-
-
-            break;
-
-        case 5:
-            //emprestimo
-            if(tipoConta==="PF"){
-
-            }else(tipoConta==="PJ"){
-
-        }
-
-
-            break;
-
-        case 6:
-            //excluir
-            if(tipoConta==="PF"){
-
-            }else(tipoConta==="PJ"){
-
-        }
-
-
-            break;
-
-        case 0:
-
-        break;
-
-        default:
-        console.log("Comando invalido, tente novamente");
-        break;
-    }
-
-} while (true);
+export {}

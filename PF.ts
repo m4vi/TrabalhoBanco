@@ -1,70 +1,79 @@
-export class PF{
-    private _nomeTitular:string;
-    private _cpf:number;
-    private _senha:number;
-    private _numeroConta:number;
-    private _saldo:number;
-    
-    constructor(nomeTitular:string,cpf:number, senha:number,_numeroConta:number,saldo:number){
+export class PF {
+    private _nomeTitular: string;
+    private _cpf: number;
+    private _senha: number;
+    private _numeroConta: number;
+    private _saldo: number;
+
+    constructor(nomeTitular: string, cpf: number, senha: number, numeroConta: number, saldo: number) {
         this._nomeTitular = nomeTitular;
         this._cpf = cpf;
         this._senha = senha;
-        this._numeroConta = _numeroConta;
+        this._numeroConta = numeroConta;
         this._saldo = saldo;
     }
-    get nomeTitular(){
+
+    get nomeTitular() {
         return this._nomeTitular;
     }
-    set nomeTitular(nomeTitular: string){
+
+    set nomeTitular(nomeTitular: string) {
         this._nomeTitular = nomeTitular;
     }
-    get cpf(){
+
+    get cpf() {
         return this._cpf;
     }
-    set cpf(cpf: number){
+
+    set cpf(cpf: number) {
         this._cpf = cpf;
     }
-    get senha(){
+
+    get senha() {
         return this._senha;
     }
-    set senha(senha: number){
+
+    set senha(senha: number) {
         this._senha = senha;
     }
-    get numeroConta(){
+
+    get numeroConta() {
         return this._numeroConta;
     }
-    set numeroConta(numeroConta: number){
+
+    set numeroConta(numeroConta: number) {
         this._numeroConta = numeroConta;
     }
-    get saldo(){
+
+    get saldo() {
         return this._saldo;
     }
-    set saldo(saldo: number){
-        this.saldo;
-    }  
-    public saque (contasFisicas[]: PF, indice: number, valor: number) {
+
+    set saldo(saldo: number) {
+        this._saldo = saldo;
+    }
+
+    public saque(contasFisicas: PF[], indice: number, valor: number) {
         if (contasFisicas[indice].saldo > valor) {
             contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
-        }
-        else {
-            console.log("\n insuficiente\n");
-        }
-    }
-    
-    public deposito(contasPF[]:PF,indice:number,valor:number){
-        if(!isNaN(valor) && valor > 0 && contasPF[indice]){
-            contasPF[indice].saldo += valor; 
-        } else{
-            console.log("Deposito Inválido");
-            
+        } else {
+            console.log("\nSaldo insuficiente\n");
         }
     }
 
-    infoPF(){
+    public deposito(contasPF: PF[], indice: number, valor: number) {
+        if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
+            contasPF[indice].saldo += valor;
+        } else {
+            console.log("Depósito Inválido");
+        }
+    }
+
+    infoPF() {
         console.log("-------------------");
         console.log(`Nome: ${this._nomeTitular}`);
         console.log(`Saldo: ${this._saldo}`);
         console.log(`Número Conta: ${this._numeroConta}`);
-        
     }
 }
+export {}

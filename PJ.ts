@@ -1,73 +1,79 @@
-export class PJ{
-    private _nomePJ: string;
-    private _cnpj: number;       
-    private _senhaPJ: number;
-    private _numeroContaPJ: number;
-    private _saldoPJ: number;
-    
-    constructor (nomePJ: string, cnpj: number, senhaPJ: number, numeroContaPJ: number, saldoPJ: number) 
-    {
-        this._nomePJ = nomePJ;
+export class PJ {
+    private _nomeTitular: string;
+    private _cnpj: number;
+    private _senha: number;
+    private _numeroConta: number;
+    private _saldo: number;
+
+    constructor(nomeTitular: string, cnpj: number, senha: number, numeroConta: number, saldo: number) {
+        this._nomeTitular = nomeTitular;
         this._cnpj = cnpj;
-        this._senhaPJ = senhaPJ;
-        this._numeroContaPJ = numeroContaPJ;
-        this._saldoPJ = saldoPJ;
+        this._senha = senha;
+        this._numeroConta = numeroConta;
+        this._saldo = saldo;
     }
 
-    get nomePJ(){
-        return this._nomePJ;
+    get nomeTitular() {
+        return this._nomeTitular;
     }
-    set nomePJ(nomePJ: string){
-        this._nomePJ = nomePJ;
+
+    set nomeTitular(nomeTitular: string) {
+        this._nomeTitular = nomeTitular;
     }
-    get cnpj(){
+
+    get cnpj() {
         return this._cnpj;
     }
-    set cnpj(cnpj: number){
+
+    set cnpj(cnpj: number) {
         this._cnpj = cnpj;
     }
-    get senhaPJ(){
-        return this._senhaPJ;
-    }
-    set senhaPJ(senhaPJ: number){
-        this._senhaPJ = senhaPJ;
-    }
-    get numeroContaPJ(){
-        return this._numeroContaPJ;
-    }
-    set numeroContaPJ(numeroContaPJ: number){
-        this._numeroContaPJ = numeroContaPJ;
-    }
-    get saldoPJ(){
-        return this._saldoPJ;
-    }
-    set saldoPJ(saldoPJ: number){
-        this.saldoPJ;
+
+    get senha() {
+        return this._senha;
     }
 
-    public saque(contasPJ[]:PJ, indice:number, valor:number){
-        if(valor < contasPJ[indice].saldo){
-            contasPJ[indice].saldo -= valor;
-        } else{
-            console.log("Saque não autorizado"); 
+    set senha(senha: number) {
+        this._senha = senha;
+    }
+
+    get numeroConta() {
+        return this._numeroConta;
+    }
+
+    set numeroConta(numeroConta: number) {
+        this._numeroConta = numeroConta;
+    }
+
+    get saldo() {
+        return this._saldo;
+    }
+
+    set saldo(saldo: number) {
+        this._saldo = saldo;
+    }
+
+    public saque(contasFisicas: PJ[], indice: number, valor: number) {
+        if (contasFisicas[indice].saldo > valor) {
+            contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
+        } else {
+            console.log("\nSaldo insuficiente\n");
         }
     }
 
-    public deposito(contasPJ[]:PJ, indice:number, valor:number){
-        if(!isNaN(valor && valor > 0 && contasPJ[indice])){
-            contasPJ[indice].saldo += valor;
-        } else{
-            console.log("Depósito não autorizado");
-            
+    public deposito(contasPF: PJ[], indice: number, valor: number) {
+        if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
+            contasPF[indice].saldo += valor;
+        } else {
+            console.log("Depósito Inválido");
         }
     }
 
-    infoPJ(){
+    infoPF() {
         console.log("-------------------");
-        console.log(`Nome: ${this._nomePJ}`);
-        console.log(`Saldo: ${this._saldoPJ}`);
-        console.log(`Número Conta: ${this._numeroContaPJ}`);
-        
+        console.log(`Nome: ${this._nomeTitular}`);
+        console.log(`Saldo: ${this._saldo}`);
+        console.log(`Número Conta: ${this._numeroConta}`);
     }
-
 }
+export {}
