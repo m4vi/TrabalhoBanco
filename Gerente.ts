@@ -53,10 +53,11 @@ export class Gerente{
     //public adicionarContaPF(PFconta:{nomeTitular:string,cpf:number,senha:number,numeroConta:number,saldo:number,extratoSaque:number[],extratoDeposito:number}){} 
 
 
-    //public adicionarContaPF(numeroConta: number): void {
-      //  this._contasPF.push(numeroConta);
-    //}
+    public adicionarContaPF(numeroConta: PF) {
+        return this._contasPF.push(numeroConta);
+    }
 
+<<<<<<< Updated upstream
     public getContaPJ(numeroConta: number): PF {
         return this._contasPF[numeroConta];
     }
@@ -64,12 +65,21 @@ export class Gerente{
     //public adicionarContaPJ(numeroConta: number): void {
       //  this._contasPJ.push(numeroConta);
     //}
+=======
+    public getContaPJ(numeroConta: number) {
+        return this._contasPF[numeroConta];
+    }
+
+    public adicionarContaPJ(numeroConta: PJ) {
+        return this._contasPJ.push(numeroConta);
+    }
+>>>>>>> Stashed changes
     
 
     public removerContaPF(numeroConta: number): void {
-        const novoArray: number[] = [];
+        const novoArray: PF[] = [];
         for (let i = 0; i < this._contasPF.length; i++) {
-            if (this._contasPF[i] !== numeroConta) {
+            if (this._contasPF[i].numeroConta !== numeroConta) {
                 novoArray.push(this._contasPF[i]);
             }
         }
@@ -77,9 +87,9 @@ export class Gerente{
     }
 
     public removerContaPJ(numeroConta: number): void {
-        const novoArray: number[] = [];
+        const novoArray: PJ[] = [];
         for (let i = 0; i < this._contasPJ.length; i++) {
-            if (this._contasPJ[i] !== numeroConta) {
+            if (this._contasPJ[i].numeroConta !== numeroConta) {
                 novoArray.push(this._contasPJ[i]);
             }
         }
@@ -124,5 +134,9 @@ export class Gerente{
         this._contasPJ = novoArray;
     }
 
+<<<<<<< Updated upstream
 }
 */
+=======
+} */
+>>>>>>> Stashed changes
