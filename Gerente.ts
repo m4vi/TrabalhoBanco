@@ -80,21 +80,7 @@ export class Gerente{
         this._contasPJ.push(numeroConta);
     }
     
-    
-    // VERSÃO ADPATADA DO PROFESSOR: TESTAR!
-    removerContaPF(contasPF: PF){
-        let index = this._contasPF.indexOf(contasPF);
-        if(index >= 0){
-            this._contasPF.splice(index, 1);
-        }        
-    }
-    removerContapj(contasPJ: PJ){
-        let index = this._contasPJ.indexOf(contasPJ);
-        if(index >= 0){
-            this._contasPJ.splice(index, 1);
-        }        
-    }
-    /* Versão Chat GPT
+
     public removerContaPF(numeroConta: number): void {
         const novoArray: number[] = [];
         for (let i = 0; i < this._contasPF.length; i++) {
@@ -113,6 +99,44 @@ export class Gerente{
             }
         }
         this._contasPJ = novoArray;
-    }*/
+    }
+
+}
+
+
+    
+    // VERSÃO ADPATADA DO PROFESSOR: TESTAR!
+    /*removerContaPF(contasPF: PF){
+        let index = this._contasPF.indexOf(contasPF);
+        if(index >= 0){
+            this._contasPF.splice(index, 1);
+        }        
+    }
+    removerContapj(contasPJ: PJ){
+        let index = this._contasPJ.indexOf(contasPJ);
+        if(index >= 0){
+            this._contasPJ.splice(index, 1);
+        }        
+    }
+    
+    public removerContaPF(numeroConta: number): void {
+        const novoArray: number[] = [];
+        for (let i = 0; i < this._contasPF.length; i++) {
+            if (this._contasPF[i] !== numeroConta) {
+                novoArray.push(this._contasPF[i]);
+            }
+        }
+        this._contasPF = novoArray;
+    }
+
+    public removerContaPJ(numeroConta: number): void {
+        const novoArray: number[] = [];
+        for (let i = 0; i < this._contasPJ.length; i++) {
+            if (this._contasPJ[i] !== numeroConta) {
+                novoArray.push(this._contasPJ[i]);
+            }
+        }
+        this._contasPJ = novoArray;
+    }
 
 }
