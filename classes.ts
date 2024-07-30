@@ -46,6 +46,11 @@ export class PF{
     set saldo(saldo: number){
         this.saldo;
     }  
+    public saque (contasFisicas[]: PF, indice: number, valor: number) {
+        if (contasFisicas[indice].saldo > valor) {
+            contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
+        }
+    }
 }
 
 //-------------------------------------------------------------------------------------------------//
