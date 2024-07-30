@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 //PF
@@ -60,7 +61,7 @@ export class PF{
         if(!isNaN(valor) && valor > 0 && contasPF[indice]){
             contasPF[indice].saldo += valor; 
         } else{
-            console.log("Deposito não autorizado");
+            console.log("Deposito Inválido");
             
         }
     }
@@ -120,6 +121,10 @@ export class PJ
     
     
 }
+=======
+import { PF } from "./PF";
+import { PJ } from "./PJ"
+>>>>>>> 1d822905b130650de5e199dd0403861b043137d2
 
 export class Gerente{
     private _nome: string;
