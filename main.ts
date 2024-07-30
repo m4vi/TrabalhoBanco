@@ -2,14 +2,13 @@
 import promptSync from 'prompt-sync'; //importa um módulo que captura entradas do usuário
 import {PF} from "./PF";
 import {PJ} from "./PJ";
-//import {Gerente} from "./Gerente";
+import {Gerente} from "./Gerente";
 
 const prompt = promptSync(); //cria uma instancia do prompt-sync
 
-function cadastro():void{
+function acessoMembros(){
 
 }
-
 
 
 function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
@@ -69,14 +68,19 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 
 const arraycontasPF: PF[] = [];
 const arraycontasPJ: PJ[] = [];
+const arrayGerentes: Gerente[]=[];
 var tipoConta:string='\0';
 var indiceConta:number = 0;
+let valorTransferecia:number=0;
 //------------------------------------------------------------//
 
 let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
+
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
+
+//------------------------------------------------------------//
 
 console.log(user1);
 console.log(user4);
@@ -94,19 +98,19 @@ do{
 
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Cadastrar\n"+
-        "|  2 Login\n"+
+        "|  1 Login\n"+
+        "|  2 Sou membro"+
         "|  0 Sair");
 
 
     let escolha1:number=parseInt(prompt("Digite a opção desejada: "));
 
     if(escolha1===1){
-        cadastro();
-        break;
-    }else if(escolha1===2) {
         login(arraycontasPF, arraycontasPJ);
         break;
+    }
+    else if(escolha1===2){
+        //acesso membros
     }else if(escolha1===0){
         process.exit(0); // encerra o processo com código de status 0
     }else{
@@ -114,33 +118,6 @@ do{
     }
     break;
 }while(true);
-/*
-do{
-
-    console.log("-------------------------------------\n" +
-        "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Cadastrar\n"+
-        "|  2 Login\n"+
-        "|  0 Sair");
-
-
-    let escolha1:number=parseInt(prompt("Digite a opção desejada: "));
-
-    if(escolha1===1){
-        cadastro();
-        break;
-    }else if(escolha1===2) {
-        login(arraycontasPF, arraycontasPJ);
-        break;
-    }else if(escolha1===0){
-        process.exit(0); // encerra o processo com código de status 0
-    }else{
-        console.log("\nFizeste cagada colega\n");
-    }
-    break;
-}while(true);
-*/
-
 
 let escolha: number;
 
@@ -198,11 +175,73 @@ do {
 
         case 4:
             //transferencia
-            if(tipoConta==="PF"){
+            var indiceContaRecebe:number = 0;
 
-            }else if(tipoConta==="PJ"){
+            do {
+                indiceContaRecebe= 0;
 
-        }
+                let recebeTransferencia:number=+(prompt("Digite o pix da conta destinatária: "));
+                let tamanhoRecebeTransferencia:number=recebeTransferencia.toString().length;
+
+                if(tamanhoRecebeTransferencia===11){
+                    const procuraConta = (cpf: number, arraycontas: PF[]): number => {
+                        return arraycontas.findIndex((PF) => PF.cpf === cpf);
+                    }
+                        indiceContaRecebe=procuraConta(recebeTransferencia,arraycontasPF);
+
+                    if (indiceConta == -1) {
+                        console.log("\nConta não existente\n");
+                        continue;
+                    }
+
+                    valorTransferecia=parseInt(prompt("Digite o valor: "));
+
+                    if(valorTransferecia<=0){
+                        console.log("\nValor não correspondente\n");
+                    }
+
+
+                    if(tipoConta==="PF"){
+                        arraycontasPF[indiceConta].saque(arraycontasPF, indiceConta, valorTransferecia);
+                    }else if(tipoConta==="PJ"){
+                        arraycontasPJ[indiceConta].saque(arraycontasPJ, indiceConta, valorTransferecia);
+                    }
+
+
+                    arraycontasPF[indiceContaRecebe].deposito(arraycontasPF, indiceContaRecebe, valorTransferecia);
+
+                }else if(tamanhoRecebeTransferencia===14){
+                    const procuraConta = (cnpj: number, arraycontas: PJ[]): number => {
+                        return arraycontas.findIndex((PJ) => PJ.cnpj === cnpj);
+                    }
+                    indiceContaRecebe=procuraConta(recebeTransferencia,arraycontasPJ);
+
+                    if (indiceConta == -1) {
+                        console.log("\nConta não existente\n");
+                        continue;
+                    }
+
+                    valorTransferecia=parseInt(prompt("Digite o valor: "));
+
+                    if(valorTransferecia<=0){
+                        console.log("\nValor não correspondente\n");
+                    }
+
+
+                    if(tipoConta==="PF"){
+                        arraycontasPF[indiceConta].saque(arraycontasPF, indiceConta, valorTransferecia);
+                    }else if(tipoConta==="PJ"){
+                        arraycontasPJ[indiceConta].saque(arraycontasPJ, indiceConta, valorTransferecia);
+                    }
+
+
+                    arraycontasPJ[indiceContaRecebe].deposito(arraycontasPJ, indiceContaRecebe, valorTransferecia);
+                }else{
+                    console.log("\nFizeste cagada\n");
+                    continue;
+                }
+                break;
+            }while (true);
 
 
             break;
@@ -210,6 +249,7 @@ do {
         case 5:
             //emprestimo
             if(tipoConta==="PF"){
+
 
             }else if(tipoConta==="PJ"){
 

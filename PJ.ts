@@ -4,6 +4,8 @@ export class PJ {
     private _senha: number;
     private _numeroConta: number;
     private _saldo: number;
+    private _extratoSaque: number[] = [];
+    private _extratoDeposito: number[] = [];
 
     constructor(nomeTitular: string, cnpj: number, senha: number, numeroConta: number, saldo: number) {
         this._nomeTitular = nomeTitular;
@@ -53,40 +55,40 @@ export class PJ {
         this._saldo = saldo;
     }
 
-    public saque(contasFisicas: PJ[], indice: number, valor: number) {
-        if (contasFisicas[indice].saldo > valor) {
-            contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
+    public saque(contasJuridicas: PJ[], indice: number, valor: number) {
+        if (contasJuridicas[indice].saldo >= valor) {
+            contasJuridicas[indice].saldo -= valor;
+            contasJuridicas[indice]._extratoSaque.push(valor);
         } else {
             console.log("\nSaldo insuficiente\n");
         }
     }
 
-    public deposito(contasPF: PJ[], indice: number, valor: number):number {
-        if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
-            contasPF[indice].saldo += valor;
-            return contasPF[indice].saldo;
+    public deposito(contasPJ: PJ[], indice: number, valor: number) {
+        if (!isNaN(valor) && valor > 0 && contasPJ[indice]) {
+            contasPJ[indice].saldo += valor;
+            contasPJ[indice]._extratoDeposito.push(valor);
         } else {
             console.log("Depósito Inválido");
-            return -1;
         }
-
     }
 
-    infoPJ(contasPJ:PJ[], indice:number) {
-        const saldoAtualizadoDeposito = contasPJ[indice].saldo
-        const saldoAtualizadoSaque = contasPJ[indice].saldo;
+    public infoPJ(contasPJ: PJ[], indice: number) {
         console.log("-------------------");
-        console.log(`Nome: ${this._nomeTitular}`);
-        console.log(`Saldo: ${this._saldo}`);
-        console.log(`Número Conta: ${this._numeroConta}`);
-        if(saldoAtualizadoDeposito > 0){
-            return console.log(`Deposito Realizado: ${this.deposito}`);
-        }
+        console.log(`Nome: ${contasPJ[indice].nomeTitular}`);
+        console.log(`Saldo: ${contasPJ[indice].saldo}`);
+        console.log(`Número Conta: ${contasPJ[indice].numeroConta}`);
 
-        if(saldoAtualizadoSaque > 0){
-            return console.log(`Saque Realizado: ${this.saque}`);
-        }
-        
+        console.log("Saídas Realizados:");
+        contasPJ[indice]._extratoSaque.forEach((valor, index) => {
+            console.log(`Saída ${index + 1}: ${valor}`);
+        });
+
+        console.log("Entradas Realizados:");
+        contasPJ[indice]._extratoDeposito.forEach((valor, index) => {
+            console.log(`Entrada ${index + 1}: ${valor}`);
+        });
     }
 }
-export {}
+
+export {};

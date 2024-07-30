@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-
-
-//PF
-
-
-
-//-------------------------------------------------------------------------------------------------//
-
-//PJ
-
-
-    
 import { PJ } from "./PJ";
 import { PF } from "./PF";    
 
@@ -21,15 +8,14 @@ export class Gerente{
     private _email: string;
     private _senha: number;
     private _numeroContato: number;
-    private _contasPF: PF[];
-    private _contasPJ: PJ[];
+    private _contasPF: PF[]=[];
+    private _contasPJ: PJ[]=[];
 
-    constructor(nome: string, email: string, senha: number, numeroContato: number, contasPF: number[]){
+    constructor(nome: string, email: string, senha: number, numeroContato: number){
         this._nome = nome;
         this._email = email;
         this._senha = senha;
         this._numeroContato = numeroContato;
-        this._contasPF = contasPF;
     }
 
     public getNome(): string{
@@ -64,13 +50,12 @@ export class Gerente{
         this._numeroContato = numeroContato;
     }
 
-    public getContaPF(numeroConta: number): number {
-        return this._contasPF[numeroConta];
-    }
+    //public adicionarContaPF(PFconta:{nomeTitular:string,cpf:number,senha:number,numeroConta:number,saldo:number,extratoSaque:number[],extratoDeposito:number}){} 
 
-    public adicionarContaPF(numeroConta: number): void {
-        this._contasPF.push(numeroConta);
-    }
+
+    //public adicionarContaPF(numeroConta: number): void {
+      //  this._contasPF.push(numeroConta);
+    //}
 
     public getContaPJ(numeroConta: number): number {
         return this._contasPF[numeroConta];

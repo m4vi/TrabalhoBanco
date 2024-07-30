@@ -63,6 +63,7 @@ var arraycontasPF = [];
 var arraycontasPJ = [];
 var tipoConta = '\0';
 var indiceConta = 0;
+var valorTransferecia = 0;
 //------------------------------------------------------------//
 var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
@@ -170,10 +171,59 @@ do {
             break;
         case 4:
             //transferencia
-            if (tipoConta === "PF") {
-            }
-            else if (tipoConta === "PJ") {
-            }
+            var indiceContaRecebe = 0;
+            do {
+                indiceContaRecebe = 0;
+                var recebeTransferencia = +(prompt("Digite o pix da conta destinatária: "));
+                var tamanhoRecebeTransferencia = recebeTransferencia.toString().length;
+                if (tamanhoRecebeTransferencia === 11) {
+                    var procuraConta = function (cpf, arraycontas) {
+                        return arraycontas.findIndex(function (PF) { return PF.cpf === cpf; });
+                    };
+                    indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPF);
+                    if (indiceConta == -1) {
+                        console.log("\nConta não existente\n");
+                        continue;
+                    }
+                    valorTransferecia = parseInt(prompt("Digite o valor: "));
+                    if (valorTransferecia <= 0) {
+                        console.log("\nValor não correspondente\n");
+                    }
+                    if (tipoConta === "PF") {
+                        arraycontasPF[indiceConta].saque(arraycontasPF, indiceConta, valorTransferecia);
+                    }
+                    else if (tipoConta === "PJ") {
+                        arraycontasPJ[indiceConta].saque(arraycontasPJ, indiceConta, valorTransferecia);
+                    }
+                    arraycontasPF[indiceContaRecebe].deposito(arraycontasPF, indiceContaRecebe, valorTransferecia);
+                }
+                else if (tamanhoRecebeTransferencia === 14) {
+                    var procuraConta = function (cnpj, arraycontas) {
+                        return arraycontas.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
+                    };
+                    indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPJ);
+                    if (indiceConta == -1) {
+                        console.log("\nConta não existente\n");
+                        continue;
+                    }
+                    valorTransferecia = parseInt(prompt("Digite o valor: "));
+                    if (valorTransferecia <= 0) {
+                        console.log("\nValor não correspondente\n");
+                    }
+                    if (tipoConta === "PF") {
+                        arraycontasPF[indiceConta].saque(arraycontasPF, indiceConta, valorTransferecia);
+                    }
+                    else if (tipoConta === "PJ") {
+                        arraycontasPJ[indiceConta].saque(arraycontasPJ, indiceConta, valorTransferecia);
+                    }
+                    arraycontasPJ[indiceContaRecebe].deposito(arraycontasPJ, indiceContaRecebe, valorTransferecia);
+                }
+                else {
+                    console.log("\nFizeste cagada\n");
+                    continue;
+                }
+                break;
+            } while (true);
             break;
         case 5:
             //emprestimo

@@ -79,14 +79,14 @@ export class PF {
         console.log(`Saldo: ${contasPF[indice].saldo}`);
         console.log(`Número Conta: ${contasPF[indice].numeroConta}`);
 
-        console.log("Saques Realizados:");
+        console.log("Saídas Realizados:");
         contasPF[indice]._extratoSaque.forEach((valor, index) => {
-            console.log(`Saque ${index + 1}: ${valor}`);
+            console.log(`Saída ${index + 1}: ${valor}`);
         });
 
-        console.log("Depósitos Realizados:");
+        console.log("Entradas Realizados:");
         contasPF[indice]._extratoDeposito.forEach((valor, index) => {
-            console.log(`Depósito ${index + 1}: ${valor}`);
+            console.log(`Entrada ${index + 1}: ${valor}`);
         });
     }
 }
