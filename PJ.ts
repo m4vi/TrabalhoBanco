@@ -61,19 +61,32 @@ export class PJ {
         }
     }
 
-    public deposito(contasPF: PJ[], indice: number, valor: number) {
+    public deposito(contasPF: PJ[], indice: number, valor: number):number {
         if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
             contasPF[indice].saldo += valor;
+            return contasPF[indice].saldo;
         } else {
             console.log("Depósito Inválido");
+            return -1;
         }
+
     }
 
-    infoPF() {
+    infoPJ(contasPJ:PJ[], indice:number) {
+        const saldoAtualizadoDeposito = contasPJ[indice].saldo
+        const saldoAtualizadoSaque = contasPJ[indice].saldo;
         console.log("-------------------");
         console.log(`Nome: ${this._nomeTitular}`);
         console.log(`Saldo: ${this._saldo}`);
         console.log(`Número Conta: ${this._numeroConta}`);
+        if(saldoAtualizadoDeposito > 0){
+            return console.log(`Deposito Realizado: ${this.deposito}`);
+        }
+
+        if(saldoAtualizadoSaque > 0){
+            return console.log(`Saque Realizado: ${this.saque}`);
+        }
+        
     }
 }
 export {}

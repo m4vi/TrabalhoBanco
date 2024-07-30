@@ -69,11 +69,22 @@ export class PF {
         }
     }
 
-    infoPF() {
+    infoPF(contasPF:PF[],indice:number) {
+        const saldoAtualizadoSaque = contasPF[indice].saldo;
+        const saldoAtualizadoDeposito = contasPF[indice].saldo;
         console.log("-------------------");
         console.log(`Nome: ${this._nomeTitular}`);
         console.log(`Saldo: ${this._saldo}`);
         console.log(`Número Conta: ${this._numeroConta}`);
+
+        if(saldoAtualizadoSaque > 0){
+            return console.log(`Saque Realizado: ${this.saque}`);
+        }
+
+        if(saldoAtualizadoDeposito > 0){
+            return console.log(`Deposito Realizado: ${this.deposito}`);
+            
+        }
     }
 }
 export {}
