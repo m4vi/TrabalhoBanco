@@ -104,7 +104,8 @@ var PF = /** @class */ (function () {
             console.log("O empr\u00E9stimo totalizar\u00E1: ".concat(pedido));
         }
         else {
-            console.log("Condição if não satisfeita.");
+            console.log("Provavel não aceitação de sua proposta;\n");
+            console.log("Motivo: saldo em conta muito baixo.");
         }
     };
     return PF;
