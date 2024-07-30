@@ -50,22 +50,12 @@ export class Gerente{
         this._numeroContato = numeroContato;
     }
 
-    //public adicionarContaPF(PFconta:{nomeTitular:string,cpf:number,senha:number,numeroConta:number,saldo:number,extratoSaque:number[],extratoDeposito:number}){} 
-
 
     public adicionarContaPF(numeroConta: PF) {
         return this._contasPF.push(numeroConta);
     }
 
-<<<<<<< Updated upstream
-    public getContaPJ(numeroConta: number): PF {
-        return this._contasPF[numeroConta];
-    }
 
-    //public adicionarContaPJ(numeroConta: number): void {
-      //  this._contasPJ.push(numeroConta);
-    //}
-=======
     public getContaPJ(numeroConta: number) {
         return this._contasPF[numeroConta];
     }
@@ -73,7 +63,7 @@ export class Gerente{
     public adicionarContaPJ(numeroConta: PJ) {
         return this._contasPJ.push(numeroConta);
     }
->>>>>>> Stashed changes
+
     
 
     public removerContaPF(numeroConta: number): void {
@@ -98,45 +88,3 @@ export class Gerente{
 
 }
 
-
-    
-    // VERSÃO ADPATADA DO PROFESSOR: TESTAR!
-    /*removerContaPF(contasPF: PF){
-        let index = this._contasPF.indexOf(contasPF);
-        if(index >= 0){
-            this._contasPF.splice(index, 1);
-        }        
-    }
-    removerContapj(contasPJ: PJ){
-        let index = this._contasPJ.indexOf(contasPJ);
-        if(index >= 0){
-            this._contasPJ.splice(index, 1);
-        }        
-    }
-    
-    public removerContaPF(numeroConta: number): void {
-        const novoArray: number[] = [];
-        for (let i = 0; i < this._contasPF.length; i++) {
-            if (this._contasPF[i] !== numeroConta) {
-                novoArray.push(this._contasPF[i]);
-            }
-        }
-        this._contasPF = novoArray;
-    }
-
-    public removerContaPJ(numeroConta: number): void {
-        const novoArray: number[] = [];
-        for (let i = 0; i < this._contasPJ.length; i++) {
-            if (this._contasPJ[i] !== numeroConta) {
-                novoArray.push(this._contasPJ[i]);
-            }
-        }
-        this._contasPJ = novoArray;
-    }
-
-<<<<<<< Updated upstream
-}
-*/
-=======
-} */
->>>>>>> Stashed changes
