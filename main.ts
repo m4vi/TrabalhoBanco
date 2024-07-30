@@ -303,11 +303,11 @@ do {
             break;
 
         default:
+            console.log("GAY");
             console.log("Comando invalido, tente novamente");
             break;
     }
 
 } while (true);
-
 
 export {}
