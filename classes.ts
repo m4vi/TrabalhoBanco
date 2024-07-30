@@ -183,6 +183,14 @@ export class Gerente{
         this._contasPF = novoArray;
     }
 
+    /*
+    removerCompositor(compositor: Compositor){
+        let index = this._compositores.indexOf(compositor);
+        if(index >= 0){
+            this._compositores.splice(index, 1);
+        }        
+    }
+    */
     public removerContaPJ(numeroConta: number): void {
         const novoArray: number[] = [];
         for (let i = 0; i < this._contasPJ.length; i++) {
