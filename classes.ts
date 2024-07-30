@@ -106,7 +106,8 @@ export class Gerente{
     private _email: string;
     private _senha: number;
     private _numeroContato: number;
-    private _contasPF: number[];
+    private _contasPF: PF[];
+    private _contasPF: PJ[];
 
     constructor(nome: string, email: string, senha: number, numeroContato: number, contasPF: number[]){
         this._nome = nome;
