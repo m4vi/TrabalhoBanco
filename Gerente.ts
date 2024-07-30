@@ -1,8 +1,6 @@
 import { PJ } from "./PJ";
 import { PF } from "./PF";    
 
-
-
 export class Gerente{
     private _nome: string;
     private _email: string;
@@ -63,8 +61,6 @@ export class Gerente{
     public adicionarContaPJ(numeroConta: PJ) {
         return this._contasPJ.push(numeroConta);
     }
-
-    
 
     public removerContaPF(numeroConta: number): void {
         const novoArray: PF[] = [];
