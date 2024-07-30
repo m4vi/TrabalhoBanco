@@ -59,4 +59,12 @@ export class PF{
             
         }
     }
+
+    infoPF(){
+        console.log("-------------------");
+        console.log(`Nome: ${this._nomeTitular}`);
+        console.log(`Saldo: ${this._saldo}`);
+        console.log(`Número Conta: ${this._numeroConta}`);
+        
+    }
 }

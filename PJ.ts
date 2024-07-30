@@ -62,4 +62,12 @@ export class PJ{
         }
     }
 
+    infoPJ(){
+        console.log("-------------------");
+        console.log(`Nome: ${this._nomePJ}`);
+        console.log(`Saldo: ${this._saldoPJ}`);
+        console.log(`Número Conta: ${this._numeroContaPJ}`);
+        
+    }
+
 }
