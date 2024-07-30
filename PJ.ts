@@ -21,7 +21,7 @@ export class PJ{
         this._nomePJ = nomePJ;
     }
     get cnpj(){
-        return this._nomePJ;
+        return this._cnpj;
     }
     set cnpj(cnpj: number){
         this._cnpj = cnpj;
@@ -42,7 +42,7 @@ export class PJ{
         return this._saldoPJ;
     }
     set saldoPJ(saldoPJ: number){
-        this.saldo;
+        this.saldoPJ;
     }
 
     public saque(contasPJ[]:PJ, indice:number, valor:number){
