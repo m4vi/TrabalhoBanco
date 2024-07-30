@@ -50,6 +50,9 @@ export class PF{
         if (contasFisicas[indice].saldo > valor) {
             contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
         }
+        else {
+            console.log("\nSaldo insuficiente\n");
+        }
     }
 }
 
