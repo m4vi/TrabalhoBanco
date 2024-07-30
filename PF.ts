@@ -4,6 +4,8 @@ export class PF {
     private _senha: number;
     private _numeroConta: number;
     private _saldo: number;
+    private _extratoSaque: number[] = [];
+    private _extratoDeposito: number[] = [];
 
     constructor(nomeTitular: string, cpf: number, senha: number, numeroConta: number, saldo: number) {
         this._nomeTitular = nomeTitular;
@@ -54,8 +56,9 @@ export class PF {
     }
 
     public saque(contasFisicas: PF[], indice: number, valor: number) {
-        if (contasFisicas[indice].saldo > valor) {
-            contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
+        if (contasFisicas[indice].saldo >= valor) {
+            contasFisicas[indice].saldo -= valor;
+            contasFisicas[indice]._extratoSaque.push(valor);
         } else {
             console.log("\nSaldo insuficiente\n");
         }
@@ -64,27 +67,28 @@ export class PF {
     public deposito(contasPF: PF[], indice: number, valor: number) {
         if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
             contasPF[indice].saldo += valor;
+            contasPF[indice]._extratoDeposito.push(valor);
         } else {
             console.log("Depósito Inválido");
         }
     }
 
-    infoPF(contasPF:PF[],indice:number) {
-        const saldoAtualizadoSaque = contasPF[indice].saldo;
-        const saldoAtualizadoDeposito = contasPF[indice].saldo;
+    public infoPF(contasPF: PF[], indice: number) {
         console.log("-------------------");
-        console.log(`Nome: ${this._nomeTitular}`);
-        console.log(`Saldo: ${this._saldo}`);
-        console.log(`Número Conta: ${this._numeroConta}`);
+        console.log(`Nome: ${contasPF[indice].nomeTitular}`);
+        console.log(`Saldo: ${contasPF[indice].saldo}`);
+        console.log(`Número Conta: ${contasPF[indice].numeroConta}`);
 
-        if(saldoAtualizadoSaque > 0){
-            return console.log(`Saque Realizado: ${this.saque}`);
-        }
+        console.log("Saques Realizados:");
+        contasPF[indice]._extratoSaque.forEach((valor, index) => {
+            console.log(`Saque ${index + 1}: ${valor}`);
+        });
 
-        if(saldoAtualizadoDeposito > 0){
-            return console.log(`Deposito Realizado: ${this.deposito}`);
-            
-        }
+        console.log("Depósitos Realizados:");
+        contasPF[indice]._extratoDeposito.forEach((valor, index) => {
+            console.log(`Depósito ${index + 1}: ${valor}`);
+        });
     }
 }
-export {}
+
+export {};

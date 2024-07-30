@@ -70,16 +70,26 @@ var PJ = /** @class */ (function () {
     PJ.prototype.deposito = function (contasPF, indice, valor) {
         if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
             contasPF[indice].saldo += valor;
+            return contasPF[indice].saldo;
         }
         else {
             console.log("Depósito Inválido");
+            return -1;
         }
     };
-    PJ.prototype.infoPF = function () {
+    PJ.prototype.infoPJ = function (contasPJ, indice) {
+        var saldoAtualizadoDeposito = contasPJ[indice].saldo;
+        var saldoAtualizadoSaque = contasPJ[indice].saldo;
         console.log("-------------------");
         console.log("Nome: ".concat(this._nomeTitular));
         console.log("Saldo: ".concat(this._saldo));
         console.log("N\u00FAmero Conta: ".concat(this._numeroConta));
+        if (saldoAtualizadoDeposito > 0) {
+            return console.log("Deposito Realizado: ".concat(this.deposito));
+        }
+        if (saldoAtualizadoSaque > 0) {
+            return console.log("Saque Realizado: ".concat(this.saque));
+        }
     };
     return PJ;
 }());

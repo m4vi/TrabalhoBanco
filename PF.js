@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PF = void 0;
 var PF = /** @class */ (function () {
     function PF(nomeTitular, cpf, senha, numeroConta, saldo) {
+        this._extratoSaque = [];
+        this._extratoDeposito = [];
         this._nomeTitular = nomeTitular;
         this._cpf = cpf;
         this._senha = senha;
@@ -60,8 +62,9 @@ var PF = /** @class */ (function () {
         configurable: true
     });
     PF.prototype.saque = function (contasFisicas, indice, valor) {
-        if (contasFisicas[indice].saldo > valor) {
-            contasFisicas[indice].saldo = contasFisicas[indice].saldo - valor;
+        if (contasFisicas[indice].saldo >= valor) {
+            contasFisicas[indice].saldo -= valor;
+            contasFisicas[indice]._extratoSaque.push(valor);
         }
         else {
             console.log("\nSaldo insuficiente\n");
@@ -70,16 +73,25 @@ var PF = /** @class */ (function () {
     PF.prototype.deposito = function (contasPF, indice, valor) {
         if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
             contasPF[indice].saldo += valor;
+            contasPF[indice]._extratoDeposito.push(valor);
         }
         else {
             console.log("Depósito Inválido");
         }
     };
-    PF.prototype.infoPF = function () {
+    PF.prototype.infoPF = function (contasPF, indice) {
         console.log("-------------------");
-        console.log("Nome: ".concat(this._nomeTitular));
-        console.log("Saldo: ".concat(this._saldo));
-        console.log("N\u00FAmero Conta: ".concat(this._numeroConta));
+        console.log("Nome: ".concat(contasPF[indice].nomeTitular));
+        console.log("Saldo: ".concat(contasPF[indice].saldo));
+        console.log("N\u00FAmero Conta: ".concat(contasPF[indice].numeroConta));
+        console.log("Saques Realizados:");
+        contasPF[indice]._extratoSaque.forEach(function (valor, index) {
+            console.log("Saque ".concat(index + 1, ": ").concat(valor));
+        });
+        console.log("Depósitos Realizados:");
+        contasPF[indice]._extratoDeposito.forEach(function (valor, index) {
+            console.log("Dep\u00F3sito ".concat(index + 1, ": ").concat(valor));
+        });
     };
     return PF;
 }());
