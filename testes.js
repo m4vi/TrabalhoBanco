@@ -17,10 +17,10 @@ function login(arraycontasPF, arraycontasPJ) {
         var tamanho = usuario.toString().length;
         if (tamanho == 11) {
             tipoConta = "PF";
-            var procuraConta = function (cpf) {
-                return arraycontasPF.findIndex(function (PF) { return PF.cpf === cpf; });
+            var procuraConta = function (cpf, arraycontas) {
+                return arraycontas.findIndex(function (PF) { return PF.cpf === cpf; });
             };
-            indiceConta = procuraConta(cpf);
+            indiceConta = procuraConta(usuario, arraycontasPF);
             if (indiceConta == -1) {
                 console.log("\nConta não existente\n");
                 continue;
@@ -35,10 +35,10 @@ function login(arraycontasPF, arraycontasPJ) {
         }
         else if (tamanho == 14) {
             tipoConta = "PJ";
-            var procuraConta = function (cnpj) {
-                return arraycontasPJ.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
+            var procuraConta = function (cnpj, arraycontas) {
+                return arraycontas.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
             };
-            indiceConta = procuraConta(cnpj);
+            indiceConta = procuraConta(usuario, arraycontasPJ);
             if (indiceConta == -1) {
                 console.log("\nConta não existente\n");
                 continue;
@@ -71,6 +71,8 @@ var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
 console.log(user1);
 console.log(user4);
 //lembrar usar push
+arraycontasPF.push(user3, user4);
+arraycontasPJ.push(user1, user2);
 //------------------------------------------------------------//
 do {
     console.log("-------------------------------------\n" +
