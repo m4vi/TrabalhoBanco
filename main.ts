@@ -5,14 +5,35 @@ import {Gerente} from "./Gerente";
 
 const prompt = promptSync(); // cria uma instância do prompt-sync
 
+
+
+//! Declaração de variáveis
+
+const arraycontasPF: PF[] = [];
+const arraycontasPJ: PJ[] = [];
+const arrayGerentes: Gerente[] = [];
+let valorTransferecia: number = 0;
 let tipoConta: string = '\0';
 let indiceConta: number = 0;
+let indiceUsuarioMembro:number=0;
 
+//! Criação de usuários
 
+let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
+let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
+let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
+let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
+let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
+let user6: Gerente = new Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
 
-//! Função para acesso de membros
-let escolhaMenuGerente: number, EscolhaPessoa: number;
-function acessoMembros(arrayGerentes: Gerente[]) {
+arraycontasPJ.push(user1, user2);
+arraycontasPF.push(user3, user4);
+arrayGerentes.push(user5, user6);
+user5.adicionarContaPJ(user1);
+user5.adicionarContaPF(user3);
+
+//! Função login de membros
+function acessoMembros() {
     do {
         let usuario: string = prompt("Digite seu email: ");
         let senha: number = parseInt(prompt("Digite sua senha: "));
@@ -21,43 +42,18 @@ function acessoMembros(arrayGerentes: Gerente[]) {
             return arrayGerentes.findIndex((gerente) => gerente.getEmail() === email);
         };
 
-        let indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
-        console.log(arrayGerentes[indiceUsuarioMembro]);
+        indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
 
         if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
             continue;
         }
-
-        console.log(arrayGerentes[indiceUsuarioMembro]);
-
-        console.log("-------------------------------------\n" +
-            "|  Bem vindo ao Banco Aspili Getas  |\n" +
-            "|  1 Remover Conta:\n" +
-            "|  2 Adicionar Cliente\n" +
-            "|  0 Sair\n");
-            escolha1 = +prompt("Digite a opção desejada: ");
-
-            switch (escolhaMenuGerente) {
-                case 1: // Remover Conta
-                    EscolhaPessoa= +prompt("Digite 1-Pessoa Fisica;: ");
-                    arrayGerentes[indiceUsuarioMembro].removerContaPF;
-                    break;
-                case 2: // Adicionar Conta
-
-                    break;
-                case 0:
-                    break
-                default:
-                    console.log("Opcao invalida.");
-                    break;
-            }
-
-    } while (escolhaMenuGerente != 0);
+        break;
+    } while (true);
 }
 
-//! Função de login
+//! Função de login de clientes
 
-function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
+function login(): void {
     do {
         let usuario: number = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         let tamanho: number = usuario.toString().length;
@@ -109,56 +105,144 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
     } while (true);
 }
 
-//! Declaração de variáveis
+//! Função menu de membros
+function menuMembros() {
+    let escolha: number = -1;
+    let numberConta: number = 0;
+    let tamanhoNumber: number = 0;
+    let indiceNumber: number = 0;
 
-const arraycontasPF: PF[] = [];
-const arraycontasPJ: PJ[] = [];
-const arrayGerentes: Gerente[] = [];
-let valorTransferecia: number = 0;
+    do {
+        numberConta= 0;
+        tamanhoNumber= 0;
+        indiceNumber= 0;
+        console.log("----------------------------\n" +
+            "| 1 Criar conta\n" +
+            "| 2 Adicionar conta aos cuidados\n" +
+            "| 3 Extrato de cliente\n" +
+            "| 4 Listar clientes\n" +
+            "| 5 Excluir conta\n" +
+            "| 0 Voltar\n" +
+            "----------------------------");
 
-//! Criação de usuários
+        escolha = +prompt('Escolha: >> ');
 
-let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
-let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
-let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
-let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
-let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
-let user6: Gerente = new Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
+        switch (escolha) {
+            case 1:
+                //criação de conta aqui
+                break;
+            case 2:
+                numberConta = +prompt("Digite o número da conta que deseja adicionar");
+                tamanhoNumber = numberConta.toString().length;
 
-arraycontasPJ.push(user1, user2);
-arraycontasPF.push(user3, user4);
-arrayGerentes.push(user5, user6);
-user5.adicionarContaPJ(user1);
-user5.adicionarContaPF(user3);
+                if (tamanhoNumber == 11) {
+                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+                    };
 
-//! Menu principal
+                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
 
-let escolha1: number;
-let escolha: number;
+                } else if (tamanhoNumber == 14) {
+                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+                    };
 
-do {
+                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+                }
 
-    console.log("-------------------------------------\n" +
-        "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Login Cliente\n" +
-        "|  2 Sou Gerente\n" +
-        "|  0 Sair\n");
+                    // TODO: Adicionar a função de adicionar cliente aqui
 
-    escolha1 = +prompt("Digite a opção desejada: ");
+                break;
+            case 3:
+                numberConta = +prompt("Digite o número da conta que deseja remover");
+                tamanhoNumber = numberConta.toString().length;
 
-    if (escolha1 === 1) {
-        login(arraycontasPF, arraycontasPJ);
+                if (tamanhoNumber == 11) {
+                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+                    };
 
-    } else if (escolha1 === 2) {
-        acessoMembros(arrayGerentes);
-    } else if (escolha1 === 0) {
-        process.exit(0); // encerra o processo com código de status 0
-    } else {
-        console.log("\nFizeste cagada colega\n");
-    }
+                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
 
-    //! Menu secundário
+                    // TODO: Adicionar a função de extrato aqui
 
+                } else if (tamanhoNumber == 14) {
+                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+                    };
+
+                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+
+                    // TODO: Adicionar a função de extrato aqui
+
+                }
+                break;
+            case 4:
+                arrayGerentes[indiceUsuarioMembro].listarContasPJ();
+                arrayGerentes[indiceUsuarioMembro].listarContasPF();
+                break;
+            case 5:
+                numberConta = +prompt("Digite o número da conta que deseja remover");
+                tamanhoNumber = numberConta.toString().length;
+
+                if (tamanhoNumber == 11) {
+                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+                    };
+
+                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+
+                    // TODO: Adicionar a função de remover aqui
+
+                } else if (tamanhoNumber == 14) {
+                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+                    };
+
+                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
+                    if (indiceNumber === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+
+                    // TODO: Adicionar a função de remover aqui
+
+                }
+                break;
+            case 0:
+                break;
+            default:
+                console.log("Opção inválida");
+                break;
+        }
+    } while (escolha !== 0)
+}
+
+
+//! Função menu de clientes
+function menuClientes() {
+
+    let escolha: number = -1;
     do {
         console.log("----------------------------\n" +
             "| 1 Sacar dinheiro\n" +
@@ -277,25 +361,26 @@ do {
 
             case 5:
                 //! Simulação de empréstimo
-                if(tipoConta==="PF"){
-                    let parcelas : number;    
-                    let pedido : number;
+                if (tipoConta === "PF") {
+                    let parcelas: number;
+                    let pedido: number;
                     pedido = +prompt("Digite o valor a ser simulado >> ");
                     parcelas = +prompt("Digite quantas parcelas >> ");
                     arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
-    
-                }else if(tipoConta==="PJ"){
-                    let parcelas : number;    
-                    let pedido : number;
+
+                } else if (tipoConta === "PJ") {
+                    let parcelas: number;
+                    let pedido: number;
                     pedido = +prompt("Digite o valor a ser simulado >> ");
                     parcelas = +prompt("Digite quantas parcelas >> ");
                     arraycontasPJ[indiceConta].emprestimoPJ(arraycontasPJ, indiceConta, pedido, parcelas);
-            }
+                }
 
 
                 break;
 
             case 0:
+
                 break;
 
             default:
@@ -303,5 +388,36 @@ do {
                 break;
         }
     } while (escolha !== 0);
+}
 
-} while (escolha1 !== 0);
+
+
+
+//! Menu principal
+
+let escolha1: number;
+
+
+do {
+
+    console.log("-------------------------------------\n" +
+        "|  Bem vindo ao Banco Aspili Getas  |\n" +
+        "|  1 Login Cliente\n" +
+        "|  2 Sou Gerente\n" +
+        "|  0 Sair\n");
+
+    escolha1 = +prompt("Digite a opção desejada: ");
+
+    if (escolha1 === 1) {
+        login();
+        menuClientes();
+
+    } else if (escolha1 === 2) {
+        acessoMembros();
+        menuMembros();
+    } else if (escolha1 === 0) {
+        process.exit(0); // encerra o processo com código de status 0
+    } else {
+        console.log("\nFizeste cagada colega\n");
+    }
+}while(true);

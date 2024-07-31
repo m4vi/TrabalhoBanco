@@ -60,28 +60,28 @@ export class Gerente{
     }
 
 
-
-    // public adicionarContaPF(numeroConta: PF) {
-    //     return this._contasPF.push(numeroConta);
-    // }
-
-
-    // public getContaPJ(numeroConta: number) {
-    //     return this._contasPF[numeroConta];
-    // }
-
     public getContaPJ(numeroConta: number): PJ | undefined {
         return this._contasPJ.find(conta => conta.numeroConta === numeroConta);
     }
+
 
     public adicionarContaPJ(conta: PJ) {
         this._contasPJ.push(conta);
     }
 
-    public listarContasPJ(): PJ[] {
-        return this._contasPJ;
+    public listarContasPJ(): void {
+        console.log("Contas PJ:");
+        this._contasPJ.forEach((conta) => {
+            console.log(`Nome: ${conta.nomeTitular}, CNPJ: ${conta.cnpj}, Número da Conta: ${conta.numeroConta}`);
+        });
     }
 
+    public listarContasPF(): void {
+        console.log("Contas PF:");
+        this._contasPF.forEach((conta) => {
+            console.log(`Nome: ${conta.nomeTitular}, CPF: ${conta.cpf}, Número da Conta: ${conta.numeroConta}`);
+        });
+    }
     /*public adicionarContaPJ(numeroConta: PJ) {
         return this._contasPJ.push(numeroConta);
     }*/

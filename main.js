@@ -8,26 +8,43 @@ var PF_1 = require("./PF");
 var PJ_1 = require("./PJ");
 var Gerente_1 = require("./Gerente");
 var prompt = (0, prompt_sync_1.default)(); // cria uma instância do prompt-sync
+//! Declaração de variáveis
+var arraycontasPF = [];
+var arraycontasPJ = [];
+var arrayGerentes = [];
+var valorTransferecia = 0;
 var tipoConta = '\0';
 var indiceConta = 0;
-//! Função para acesso de membros
-function acessoMembros(arrayGerentes) {
+var indiceUsuarioMembro = 0;
+//! Criação de usuários
+var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
+var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
+var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
+var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
+var user5 = new Gerente_1.Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922, [], []);
+var user6 = new Gerente_1.Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923, [], []);
+arraycontasPJ.push(user1, user2);
+arraycontasPF.push(user3, user4);
+arrayGerentes.push(user5, user6);
+user5.adicionarContaPJ(user1);
+user5.adicionarContaPF(user3);
+//! Função login de membros
+function acessoMembros() {
     do {
         var usuario = prompt("Digite seu email: ");
         var senha = parseInt(prompt("Digite sua senha: "));
         var procuraConta = function (email, arrayGerentes) {
             return arrayGerentes.findIndex(function (gerente) { return gerente.getEmail() === email; });
         };
-        var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
-        console.log(arrayGerentes[indiceUsuarioMembro]);
+        indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
             continue;
         }
-        console.log(arrayGerentes[indiceUsuarioMembro]);
+        break;
     } while (true);
 }
-//! Função de login
-function login(arraycontasPF, arraycontasPJ) {
+//! Função de login de clientes
+function login() {
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         var tamanho = usuario.toString().length;
@@ -74,46 +91,96 @@ function login(arraycontasPF, arraycontasPJ) {
         break;
     } while (true);
 }
-//! Declaração de variáveis
-var arraycontasPF = [];
-var arraycontasPJ = [];
-var arrayGerentes = [];
-var valorTransferecia = 0;
-//! Criação de usuários
-var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
-var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
-var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
-var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
-var user5 = new Gerente_1.Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922, [], []);
-var user6 = new Gerente_1.Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923, [], []);
-arraycontasPJ.push(user1, user2);
-arraycontasPF.push(user3, user4);
-arrayGerentes.push(user5, user6);
-user5.adicionarContaPJ(user1);
-user5.adicionarContaPF(user3);
-//! Menu principal
-var escolha1;
-var escolha;
-do {
-    console.log("-------------------------------------\n" +
-        "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Login Cliente\n" +
-        "|  2 Sou Gerente\n" +
-        "|  0 Sair\n");
-    escolha1 = +prompt("Digite a opção desejada: ");
-    if (escolha1 === 1) {
-        login(arraycontasPF, arraycontasPJ);
-    }
-    else if (escolha1 === 2) {
-        acessoMembros(arrayGerentes);
-    }
-    else if (escolha1 === 0) {
-        process.exit(0); // encerra o processo com código de status 0
-    }
-    else {
-        console.log("\nFizeste cagada colega\n");
-    }
-    //! Menu secundário
+//! Função menu de membros
+function menuMembros() {
+    var escolha = -1;
+    var deleta = 0;
+    var tamanhoDelete = 0;
+    var indiceDelete = 0;
+    do {
+        console.log("----------------------------\n" +
+            "| 1 Criar conta\n" +
+            "| 2 Adicionar conta aos cuidados\n" +
+            "| 3 Extrato de cliente\n" +
+            "| 4 Listar clientes\n" +
+            "| 5 Excluir conta\n" +
+            "| 0 Voltar\n" +
+            "----------------------------");
+        escolha = +prompt('Escolha: >> ');
+        switch (escolha) {
+            case 1:
+                //criação de conta aqui
+                break;
+            case 2:
+                //adicionar conta aqui
+                break;
+            case 3:
+                deleta = +prompt("Digite o número da conta que deseja remover");
+                tamanhoDelete = deleta.toString().length;
+                if (tamanhoDelete == 11) {
+                    var procuraContaPF = function (numConta, arraycontas) {
+                        return arraycontas.findIndex(function (PF) { return PF.numeroConta === numConta; });
+                    };
+                    indiceDelete = procuraContaPF(deleta, arraycontasPF);
+                    if (indiceDelete === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+                    // TODO: Adicionar a função de extrato aqui
+                }
+                else if (tamanhoDelete == 14) {
+                    var procuraContaPJ = function (numConta, arraycontas) {
+                        return arraycontas.findIndex(function (PJ) { return PJ.numeroConta === numConta; });
+                    };
+                    indiceDelete = procuraContaPJ(deleta, arraycontasPJ);
+                    if (indiceDelete === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+                    // TODO: Adicionar a função de extrato aqui
+                }
+                break;
+            case 4:
+                arrayGerentes[indiceUsuarioMembro].listarContasPJ();
+                arrayGerentes[indiceUsuarioMembro].listarContasPF();
+                break;
+            case 5:
+                deleta = +prompt("Digite o número da conta que deseja remover");
+                tamanhoDelete = deleta.toString().length;
+                if (tamanhoDelete == 11) {
+                    var procuraContaPF = function (numConta, arraycontas) {
+                        return arraycontas.findIndex(function (PF) { return PF.numeroConta === numConta; });
+                    };
+                    indiceDelete = procuraContaPF(deleta, arraycontasPF);
+                    if (indiceDelete === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+                    // TODO: Adicionar a função de remover aqui
+                }
+                else if (tamanhoDelete == 14) {
+                    var procuraContaPJ = function (numConta, arraycontas) {
+                        return arraycontas.findIndex(function (PJ) { return PJ.numeroConta === numConta; });
+                    };
+                    indiceDelete = procuraContaPJ(deleta, arraycontasPJ);
+                    if (indiceDelete === -1) {
+                        console.log("\nConta não existente, operação reiniciada\n");
+                        continue;
+                    }
+                    // TODO: Adicionar a função de remover aqui
+                }
+                break;
+            case 0:
+                break;
+            default:
+                console.log("Opção inválida");
+                break;
+        }
+    } while (escolha !== 0);
+}
+//! Função menu de clientes
+function menuClientes() {
+    var escolha = -1;
     do {
         console.log("----------------------------\n" +
             "| 1 Sacar dinheiro\n" +
@@ -236,4 +303,28 @@ do {
                 break;
         }
     } while (escolha !== 0);
-} while (escolha1 !== 0);
+}
+//! Menu principal
+var escolha1;
+do {
+    console.log("-------------------------------------\n" +
+        "|  Bem vindo ao Banco Aspili Getas  |\n" +
+        "|  1 Login Cliente\n" +
+        "|  2 Sou Gerente\n" +
+        "|  0 Sair\n");
+    escolha1 = +prompt("Digite a opção desejada: ");
+    if (escolha1 === 1) {
+        login();
+        menuClientes();
+    }
+    else if (escolha1 === 2) {
+        acessoMembros();
+        menuMembros();
+    }
+    else if (escolha1 === 0) {
+        process.exit(0); // encerra o processo com código de status 0
+    }
+    else {
+        console.log("\nFizeste cagada colega\n");
+    }
+} while (true);

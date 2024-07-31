@@ -40,12 +40,6 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.adicionarContaPF = function (conta) {
         this._contasPF.push(conta);
     };
-    // public adicionarContaPF(numeroConta: PF) {
-    //     return this._contasPF.push(numeroConta);
-    // }
-    // public getContaPJ(numeroConta: number) {
-    //     return this._contasPF[numeroConta];
-    // }
     Gerente.prototype.getContaPJ = function (numeroConta) {
         return this._contasPJ.find(function (conta) { return conta.numeroConta === numeroConta; });
     };
@@ -53,7 +47,16 @@ var Gerente = /** @class */ (function () {
         this._contasPJ.push(conta);
     };
     Gerente.prototype.listarContasPJ = function () {
-        return this._contasPJ;
+        console.log("Contas PJ:");
+        this._contasPJ.forEach(function (conta) {
+            console.log("Nome: ".concat(conta.nomeTitular, ", CNPJ: ").concat(conta.cnpj, ", N\u00FAmero da Conta: ").concat(conta.numeroConta));
+        });
+    };
+    Gerente.prototype.listarContasPF = function () {
+        console.log("Contas PF:");
+        this._contasPF.forEach(function (conta) {
+            console.log("Nome: ".concat(conta.nomeTitular, ", CPF: ").concat(conta.cpf, ", N\u00FAmero da Conta: ").concat(conta.numeroConta));
+        });
     };
     /*public adicionarContaPJ(numeroConta: PJ) {
         return this._contasPJ.push(numeroConta);
