@@ -21,13 +21,12 @@ function acessoMembros(arrayGerentes) {
         var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
         if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
-            console.log("\nUsuário ou senha inválidos, operação reiniciada\n");
             continue;
         }
-        break;
+        console.log(arrayGerentes[indiceUsuarioMembro]);
     } while (true);
 }
-// Função de login
+//! Função de login
 function login(arraycontasPF, arraycontasPJ) {
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
@@ -85,18 +84,16 @@ var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
-var user5 = new Gerente_1.Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-var user6 = new Gerente_1.Gerente("Antonio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
+var user5 = new Gerente_1.Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922, [], []);
+var user6 = new Gerente_1.Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923, [], []);
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
 user5.adicionarContaPJ(user1);
-//------------------------------------------------------------//
+user5.adicionarContaPF(user3);
 //! Menu principal
 var escolha1;
 var escolha;
-// user5.adicionarContaPJ(user2);
-//------------------------------------------------------------//
 do {
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
@@ -109,8 +106,6 @@ do {
     }
     else if (escolha1 === 2) {
         acessoMembros(arrayGerentes);
-    }
-    else if (escolha1 === 0) {
     }
     else if (escolha1 === 0) {
         process.exit(0); // encerra o processo com código de status 0

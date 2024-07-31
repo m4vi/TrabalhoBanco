@@ -33,6 +33,8 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.setNumeroContato = function (numeroContato) {
         this._numeroContato = numeroContato;
     };
+    Gerente.prototype.adicionarContaPJ = function (user1) {
+    };
     return Gerente;
 }());
 exports.default = Gerente;
