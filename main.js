@@ -43,8 +43,13 @@ function acessoMembros() {
         break;
     } while (true);
 }
+<<<<<<< Updated upstream
 //! Função de login de clientes
 function login() {
+=======
+// Função de login
+function login(arraycontasPF, arraycontasPJ) {
+>>>>>>> Stashed changes
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         var tamanho = usuario.toString().length;
@@ -91,6 +96,7 @@ function login() {
         break;
     } while (true);
 }
+<<<<<<< Updated upstream
 //! Função menu de membros
 function menuMembros() {
     var escolha = -1;
@@ -181,6 +187,52 @@ function menuMembros() {
 //! Função menu de clientes
 function menuClientes() {
     var escolha = -1;
+=======
+//! Declaração de variáveis
+var arraycontasPF = [];
+var arraycontasPJ = [];
+var arrayGerentes = [];
+var tipoConta = '\0';
+var indiceConta = 0;
+var valorTransferecia = 0;
+//! Criação de usuários
+var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
+var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
+var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
+var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
+var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
+var user6 = new newGerente_1.default("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
+arraycontasPJ.push(user1, user2);
+arraycontasPF.push(user3, user4);
+arrayGerentes.push(user5, user6);
+var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
+//------------------------------------------------------------//
+//! Menu principal
+var escolha1;
+var escolha;
+// user5.adicionarContaPJ(user2);
+//------------------------------------------------------------//
+do {
+    console.log("-------------------------------------\n" +
+        "|  Bem vindo ao Banco Aspili Getas  |\n" +
+        "|  1 Login\n" +
+        "|  2 Sou membro\n" +
+        "|  0 Sair\n");
+    escolha1 = +prompt("Digite a opção desejada: ");
+    if (escolha1 === 1) {
+        login(arraycontasPF, arraycontasPJ);
+    }
+    else if (escolha1 === 2) {
+        acessoMembros(arrayGerentes);
+    }
+    else if (escolha1 === 0) {
+        process.exit(0); // encerra o processo com código de status 0
+    }
+    else {
+        console.log("\nFizeste cagada colega\n");
+    }
+    //! Menu secundário
+>>>>>>> Stashed changes
     do {
         console.log("----------------------------\n" +
             "| 1 Sacar dinheiro\n" +
