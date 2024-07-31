@@ -15,16 +15,8 @@ export class PJ {
         this._saldo = saldo;
     }
 
-    // get nomeTitular() {
-    //     return this._nomeTitular;
-    // }
-
-    public getNome(): string {
+    get nomeTitular() {
         return this._nomeTitular;
-    }
-
-    public getCNPJ(): number {
-        return this._cnpj;
     }
 
     set nomeTitular(nomeTitular: string) {
@@ -34,7 +26,7 @@ export class PJ {
     get cnpj() {
         return this._cnpj;
     }
-
+    
     set cnpj(cnpj: number) {
         this._cnpj = cnpj;
     }
@@ -114,6 +106,8 @@ export class PJ {
         }
     }
 
+    
+    
 }
 
 export {};

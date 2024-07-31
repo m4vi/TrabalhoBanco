@@ -34,20 +34,19 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.setNumeroContato = function (numeroContato) {
         this._numeroContato = numeroContato;
     };
-    //public adicionarContaPF(PFconta:{nomeTitular:string,cpf:number,senha:number,numeroConta:number,saldo:number,extratoSaque:number[],extratoDeposito:number}){} 
-    //public adicionarContaPF(numeroConta: number): void {
-    //  this._contasPF.push(numeroConta);
-    //}
+    Gerente.prototype.adicionarContaPF = function (numeroConta) {
+        return this._contasPF.push(numeroConta);
+    };
     Gerente.prototype.getContaPJ = function (numeroConta) {
         return this._contasPF[numeroConta];
     };
-    //public adicionarContaPJ(numeroConta: number): void {
-    //  this._contasPJ.push(numeroConta);
-    //}
+    Gerente.prototype.adicionarContaPJ = function (numeroConta) {
+        return this._contasPJ.push(numeroConta);
+    };
     Gerente.prototype.removerContaPF = function (numeroConta) {
         var novoArray = [];
         for (var i = 0; i < this._contasPF.length; i++) {
-            if (this._contasPF[i] !== numeroConta) {
+            if (this._contasPF[i].numeroConta !== numeroConta) {
                 novoArray.push(this._contasPF[i]);
             }
         }
@@ -56,7 +55,7 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.removerContaPJ = function (numeroConta) {
         var novoArray = [];
         for (var i = 0; i < this._contasPJ.length; i++) {
-            if (this._contasPJ[i] !== numeroConta) {
+            if (this._contasPJ[i].numeroConta !== numeroConta) {
                 novoArray.push(this._contasPJ[i]);
             }
         }
@@ -65,39 +64,3 @@ var Gerente = /** @class */ (function () {
     return Gerente;
 }());
 exports.Gerente = Gerente;
-// VERSÃO ADPATADA DO PROFESSOR: TESTAR!
-/*removerContaPF(contasPF: PF){
-    let index = this._contasPF.indexOf(contasPF);
-    if(index >= 0){
-        this._contasPF.splice(index, 1);
-    }
-}
-removerContapj(contasPJ: PJ){
-    let index = this._contasPJ.indexOf(contasPJ);
-    if(index >= 0){
-        this._contasPJ.splice(index, 1);
-    }
-}
-
-public removerContaPF(numeroConta: number): void {
-    const novoArray: number[] = [];
-    for (let i = 0; i < this._contasPF.length; i++) {
-        if (this._contasPF[i] !== numeroConta) {
-            novoArray.push(this._contasPF[i]);
-        }
-    }
-    this._contasPF = novoArray;
-}
-
-public removerContaPJ(numeroConta: number): void {
-    const novoArray: number[] = [];
-    for (let i = 0; i < this._contasPJ.length; i++) {
-        if (this._contasPJ[i] !== numeroConta) {
-            novoArray.push(this._contasPJ[i]);
-        }
-    }
-    this._contasPJ = novoArray;
-}
-
-}
-*/ 
