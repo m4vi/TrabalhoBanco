@@ -27,7 +27,7 @@ function acessoMembros(arrayGerentes) {
         break;
     } while (true);
 }
-//! Função de login
+// Função de login
 function login(arraycontasPF, arraycontasPJ) {
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
@@ -90,13 +90,16 @@ var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
 var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-var user6 = new newGerente_1.default("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
+var user6 = new newGerente_1.default("Antonio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
+//------------------------------------------------------------//
 //! Menu principal
 var escolha1;
 var escolha;
+// user5.adicionarContaPJ(user2);
+//------------------------------------------------------------//
 do {
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
@@ -109,6 +112,8 @@ do {
     }
     else if (escolha1 === 2) {
         acessoMembros(arrayGerentes);
+    }
+    else if (escolha1 === 0) {
     }
     else if (escolha1 === 0) {
         process.exit(0); // encerra o processo com código de status 0

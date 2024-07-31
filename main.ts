@@ -3,7 +3,8 @@
 import promptSync from 'prompt-sync'; // importa um módulo que captura entradas do usuário
 import { PF } from "./PF";
 import { PJ } from "./PJ";
-import Gerente from "./newGerente";
+import {Gerente} from "./Gerente";
+import { log } from 'console';
 
 const prompt = promptSync(); // cria uma instância do prompt-sync
 
@@ -105,14 +106,15 @@ let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-let user6: Gerente = new Gerente("Antonio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
+
 
 
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
-arrayGerentes.push(user5, user6);
 
-user5.adicionarContaPj(user1);
+user5.adicionarContaPJ(user1);
+user5.adicionarContaPJ(user2);
+arrayGerentes.push(user5);
 
 
 //------------------------------------------------------------//
@@ -126,16 +128,11 @@ let escolha: number;
 
 
 
-// user5.adicionarContaPJ(user2);
-
-
 
 //------------------------------------------------------------//
 
 
-do{
-
-
+do {
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
         "|  1 Login\n" +
@@ -150,15 +147,20 @@ do{
     } else if (escolha1 === 2) {
         acessoMembros(arrayGerentes);
 
+        // Listar contas PJ do gerente
+        user5.listarContasPJ().forEach(conta => {
+            console.log(`- ${conta.getNome()} (CNPJ: ${conta.getCNPJ()})`);
+        });
+
     } else if (escolha1 === 0) {
-
-        
-    }else if(escolha1===0){
-
         process.exit(0); // encerra o processo com código de status 0
+
     } else {
         console.log("\nFizeste cagada colega\n");
     }
+
+} while (escolha1 !== 0);
+
 
     //! Menu secundário
 
