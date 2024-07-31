@@ -97,8 +97,8 @@ var escolha;
 do {
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
-        "|  1 Login\n" +
-        "|  2 Sou membro\n" +
+        "|  1 Login Cliente\n" +
+        "|  2 Sou Gerente\n" +
         "|  0 Sair\n");
     escolha1 = +prompt("Digite a opção desejada: ");
     if (escolha1 === 1) {

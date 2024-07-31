@@ -11,7 +11,7 @@ let indiceConta: number = 0;
 
 
 //! Função para acesso de membros
-
+let escolhaMenuGerente: number, EscolhaPessoa: number;
 function acessoMembros(arrayGerentes: Gerente[]) {
     do {
         let usuario: string = prompt("Digite seu email: ");
@@ -30,11 +30,29 @@ function acessoMembros(arrayGerentes: Gerente[]) {
 
         console.log(arrayGerentes[indiceUsuarioMembro]);
 
+        console.log("-------------------------------------\n" +
+            "|  Bem vindo ao Banco Aspili Getas  |\n" +
+            "|  1 Remover Conta:\n" +
+            "|  2 Adicionar Cliente\n" +
+            "|  0 Sair\n");
+            escolha1 = +prompt("Digite a opção desejada: ");
 
+            switch (escolhaMenuGerente) {
+                case 1: // Remover Conta
+                    EscolhaPessoa= +prompt("Digite 1-Pessoa Fisica;: ");
+                    arrayGerentes[indiceUsuarioMembro].removerContaPF;
+                    break;
+                case 2: // Adicionar Conta
 
+                    break;
+                case 0:
+                    break
+                default:
+                    console.log("Opcao invalida.");
+                    break;
+            }
 
-
-    } while (true);
+    } while (escolhaMenuGerente != 0);
 }
 
 //! Função de login
@@ -105,7 +123,7 @@ let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
-let user6: Gerente = new Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
+let user6: Gerente = new Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
 
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
