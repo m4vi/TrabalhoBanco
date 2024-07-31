@@ -3,11 +3,11 @@
 import promptSync from 'prompt-sync'; // importa um módulo que captura entradas do usuário
 import { PF } from "./PF";
 import { PJ } from "./PJ";
-import Gerente from "./newGerente";
+import {Gerente} from "./Gerente";
 
 const prompt = promptSync(); // cria uma instância do prompt-sync
 
-// Função para acesso de membros
+//* Função para acesso de membros
 
 function acessoMembros(arrayGerentes: Gerente[]) {
     do {
@@ -112,7 +112,7 @@ arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
 
-user5.adicionarContaPj(user1);
+user5.adicionarContaPJ(user1);
 
 
 //------------------------------------------------------------//
@@ -172,7 +172,7 @@ do{
             "| 0 Voltar\n" +
             "----------------------------");
 
-        escolha = +prompt('Escolha: >> ');
+        escolha = +prompt("Escolha: >> ");
 
         switch (escolha) {
             case 1:
