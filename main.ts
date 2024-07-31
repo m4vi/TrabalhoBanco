@@ -107,16 +107,35 @@ let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
 let user6: Gerente = new Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
 
+<<<<<<< Updated upstream
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
+=======
+let user5: Gerente= new Gerente("Pintoncio da silva","pindamonhaga@asp.com.br",12345678,40028922);
+
+
+//------------------------------------------------------------//
+>>>>>>> Stashed changes
 
 //! Menu principal
 
+<<<<<<< Updated upstream
 let escolha1: number;
 let escolha: number;
 
 do {
+=======
+
+// user5.adicionarContaPJ(user2);
+
+
+
+//------------------------------------------------------------//
+
+
+do{
+>>>>>>> Stashed changes
 
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
@@ -131,7 +150,12 @@ do {
 
     } else if (escolha1 === 2) {
         acessoMembros(arrayGerentes);
+<<<<<<< Updated upstream
     } else if (escolha1 === 0) {
+=======
+        
+    }else if(escolha1===0){
+>>>>>>> Stashed changes
         process.exit(0); // encerra o processo com código de status 0
     } else {
         console.log("\nFizeste cagada colega\n");
