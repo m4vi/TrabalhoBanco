@@ -89,6 +89,23 @@ export class PJ {
             console.log(`Entrada ${index + 1}: ${valor}`);
         });
     }
+
+    public emprestimoPJ(contasPJ: PJ[], indice: number, pedido: number, parcelas: number): void {
+            
+        if ((contasPJ[indice].saldo) * 0.85 >= pedido) {
+            pedido = pedido * 1.45;
+            if (parcelas > 0) {
+                pedido = pedido * (parcelas * 1.10);
+                let val = pedido/parcelas;
+                console.log(`Numero de parcelas {${parcelas}}. Valor de cada parcela: ${val}`);
+            }
+        console.log(`O empréstimo totalizará: ${pedido}`);
+        } else {
+            console.log("Provavel não aceitação de sua proposta;\n");
+            console.log("Motivo: saldo em conta muito baixo.");
+        }
+    }
+
 }
 
 export {};

@@ -1,23 +1,23 @@
 "use strict";
+// Importações
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//importações
-var prompt_sync_1 = __importDefault(require("prompt-sync")); //importa um módulo que captura entradas do usuário
+var prompt_sync_1 = __importDefault(require("prompt-sync")); // importa um módulo que captura entradas do usuário
 var PF_1 = require("./PF");
 var PJ_1 = require("./PJ");
 var newGerente_1 = __importDefault(require("./newGerente"));
-var prompt = (0, prompt_sync_1.default)(); //cria uma instancia do prompt-sync
+var prompt = (0, prompt_sync_1.default)(); // cria uma instância do prompt-sync
+// Função para acesso de membros
 function acessoMembros(arrayGerentes) {
     do {
         var usuario = prompt("Digite seu email: ");
-        var tamanho = usuario.length;
         var senha = parseInt(prompt("Digite sua senha: "));
         var procuraConta = function (email, arrayGerentes) {
             return arrayGerentes.findIndex(function (gerente) { return gerente.getEmail() === email; });
         };
-        indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
+        var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
         var inputSenha = parseInt(prompt("Senha da conta: "));
         if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha || indiceUsuarioMembro == -1) {
@@ -27,41 +27,44 @@ function acessoMembros(arrayGerentes) {
         break;
     } while (true);
 }
+//! Função de login
 function login(arraycontasPF, arraycontasPJ) {
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         var tamanho = usuario.toString().length;
+        var tipoConta_1 = void 0;
+        var indiceConta_1 = void 0;
         if (tamanho == 11) {
-            tipoConta = "PF";
+            tipoConta_1 = "PF";
             var procuraConta = function (cpf, arraycontas) {
                 return arraycontas.findIndex(function (PF) { return PF.cpf === cpf; });
             };
-            indiceConta = procuraConta(usuario, arraycontasPF);
-            if (indiceConta == -1) {
+            indiceConta_1 = procuraConta(usuario, arraycontasPF);
+            if (indiceConta_1 == -1) {
                 console.log("\nConta não existente\n");
                 continue;
             }
             else {
                 var inputSenha = parseInt(prompt("Senha da conta: "));
-                if (arraycontasPF[indiceConta].senha !== inputSenha) {
+                if (arraycontasPF[indiceConta_1].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
                 }
             }
         }
         else if (tamanho == 14) {
-            tipoConta = "PJ";
+            tipoConta_1 = "PJ";
             var procuraConta = function (cnpj, arraycontas) {
                 return arraycontas.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
             };
-            indiceConta = procuraConta(usuario, arraycontasPJ);
-            if (indiceConta == -1) {
+            indiceConta_1 = procuraConta(usuario, arraycontasPJ);
+            if (indiceConta_1 == -1) {
                 console.log("\nConta não existente\n");
                 continue;
             }
             else {
                 var inputSenha = parseInt(prompt("Senha da conta: "));
-                if (arraycontasPJ[indiceConta].senha !== inputSenha) {
+                if (arraycontasPJ[indiceConta_1].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
                 }
@@ -74,27 +77,24 @@ function login(arraycontasPF, arraycontasPJ) {
         break;
     } while (true);
 }
-//main
+//! Declaração de variáveis
 var arraycontasPF = [];
 var arraycontasPJ = [];
 var arrayGerentes = [];
-//------------------------------------------------------------//
 var tipoConta = '\0';
 var indiceConta = 0;
-var indiceUsuarioMembro = 0;
 var valorTransferecia = 0;
-//------------------------------------------------------------//
+//! Criação de usuários
 var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
 var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
 var user6 = new newGerente_1.default("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
-//-----------------------------------------------------------0
--arraycontasPJ.push(user1, user2);
+arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
-//------------------------------------------------------------//
+//! Menu principal
 var escolha1;
 var escolha;
 do {
@@ -116,6 +116,7 @@ do {
     else {
         console.log("\nFizeste cagada colega\n");
     }
+    //! Menu secundário
     do {
         console.log("----------------------------\n" +
             "| 1 Sacar dinheiro\n" +
@@ -128,7 +129,7 @@ do {
         escolha = +prompt('Escolha: >> ');
         switch (escolha) {
             case 1:
-                //saque
+                //! Saque
                 if (tipoConta === "PF") {
                     var valorSaque = parseFloat(prompt("Digite o valor do saque: "));
                     arraycontasPF[indiceConta].saque(arraycontasPF, indiceConta, valorSaque);
@@ -139,7 +140,7 @@ do {
                 }
                 break;
             case 2:
-                //depositar
+                //! Depositar
                 if (tipoConta === "PF") {
                     var valorDeposito = parseFloat(prompt("Digite o valor do deposito: "));
                     arraycontasPF[indiceConta].deposito(arraycontasPF, indiceConta, valorDeposito);
@@ -150,17 +151,16 @@ do {
                 }
                 break;
             case 3:
-                //extrato
+                //! Extrato
                 if (tipoConta === "PF") {
                     arraycontasPF[indiceConta].infoPF(arraycontasPF, indiceConta);
-                    //infoPF(contasPF:PF[],indice:number)
                 }
                 else if (tipoConta === "PJ") {
                     arraycontasPJ[indiceConta].infoPJ(arraycontasPJ, indiceConta);
                 }
                 break;
             case 4:
-                //transferencia
+                //! Transferência
                 var indiceContaRecebe = 0;
                 do {
                     indiceContaRecebe = 0;
@@ -216,7 +216,7 @@ do {
                 } while (true);
                 break;
             case 5:
-                //emprestimo
+                // Empréstimo
                 if (tipoConta === "PF") {
                     var parcelas = void 0;
                     var pedido = void 0;
@@ -225,6 +225,11 @@ do {
                     arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
                 }
                 else if (tipoConta === "PJ") {
+                    var parcelas = void 0;
+                    var pedido = void 0;
+                    pedido = +prompt("Digite o valor a ser simulado >> ");
+                    parcelas = +prompt("Digite quantas parcelas >> ");
+                    arraycontasPJ[indiceConta].emprestimoPJ(arraycontasPJ, indiceConta, pedido, parcelas);
                 }
                 break;
             case 0:

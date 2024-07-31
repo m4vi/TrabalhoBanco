@@ -93,6 +93,21 @@ var PJ = /** @class */ (function () {
             console.log("Entrada ".concat(index + 1, ": ").concat(valor));
         });
     };
+    PJ.prototype.emprestimoPJ = function (contasPJ, indice, pedido, parcelas) {
+        if ((contasPJ[indice].saldo) * 0.85 >= pedido) {
+            pedido = pedido * 1.45;
+            if (parcelas > 0) {
+                pedido = pedido * (parcelas * 1.10);
+                var val = pedido / parcelas;
+                console.log("Numero de parcelas {".concat(parcelas, "}. Valor de cada parcela: ").concat(val));
+            }
+            console.log("O empr\u00E9stimo totalizar\u00E1: ".concat(pedido));
+        }
+        else {
+            console.log("Provavel não aceitação de sua proposta;\n");
+            console.log("Motivo: saldo em conta muito baixo.");
+        }
+    };
     return PJ;
 }());
 exports.PJ = PJ;

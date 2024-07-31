@@ -1,4 +1,4 @@
-//! Importações
+// Importações
 
 import promptSync from 'prompt-sync'; // importa um módulo que captura entradas do usuário
 import { PF } from "./PF";
@@ -7,7 +7,7 @@ import Gerente from "./newGerente";
 
 const prompt = promptSync(); // cria uma instância do prompt-sync
 
-//! Função para acesso de membros
+// Função para acesso de membros
 
 function acessoMembros(arrayGerentes: Gerente[]) {
     do {
@@ -33,7 +33,7 @@ function acessoMembros(arrayGerentes: Gerente[]) {
     } while (true);
 }
 
-//! Função de login
+// Função de login
 
 function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
     do {
@@ -255,7 +255,7 @@ do {
                 break;
 
             case 5:
-                //! Empréstimo
+                // Empréstimo
                 if (tipoConta === "PF") {
                     let parcelas: number;
                     let pedido: number;
@@ -264,7 +264,11 @@ do {
                     arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
 
                 } else if (tipoConta === "PJ") {
-                    // Lógica para empréstimo PJ
+                    let parcelas : number;    
+                    let pedido : number;
+                    pedido = +prompt("Digite o valor a ser simulado >> ");
+                    parcelas = +prompt("Digite quantas parcelas >> ");
+                    arraycontasPJ[indiceConta].emprestimoPJ(arraycontasPJ, indiceConta, pedido, parcelas);
                 }
                 break;
 
