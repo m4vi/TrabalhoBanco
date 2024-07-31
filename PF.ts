@@ -55,23 +55,24 @@ export class PF {
         this._saldo = saldo;
     }
 
-    public saque(contasFisicas: PF[], indice: number, valor: number) {
-        if (contasFisicas[indice].saldo >= valor) {
-            contasFisicas[indice].saldo -= valor;
-            contasFisicas[indice]._extratoSaque.push(valor);
+    public saque(contasJuridicas: PF[], indice: number, valor: number) {
+        if (contasJuridicas[indice].saldo >= valor) {
+            contasJuridicas[indice].saldo -= valor;
+            contasJuridicas[indice]._extratoSaque.push(valor);
         } else {
             console.log("\nSaldo insuficiente\n");
         }
     }
 
-    public deposito(contasPF: PF[], indice: number, valor: number) {
-        if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
-            contasPF[indice].saldo += valor;
-            contasPF[indice]._extratoDeposito.push(valor);
+    public deposito(contasPJ: PF[], indice: number, valor: number) {
+        if (!isNaN(valor) && valor > 0 && contasPJ[indice]) {
+            contasPJ[indice].saldo += valor;
+            contasPJ[indice]._extratoDeposito.push(valor);
         } else {
             console.log("Depósito Inválido");
         }
     }
+
 
     public infoPF(contasPF: PF[], indice: number) {
         console.log("-------------------");

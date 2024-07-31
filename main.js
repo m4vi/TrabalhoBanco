@@ -1,5 +1,4 @@
 "use strict";
-// Importações
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -9,7 +8,9 @@ var PF_1 = require("./PF");
 var PJ_1 = require("./PJ");
 var Gerente_1 = require("./Gerente");
 var prompt = (0, prompt_sync_1.default)(); // cria uma instância do prompt-sync
-// Função para acesso de membros
+var tipoConta = '\0';
+var indiceConta = 0;
+//! Função para acesso de membros
 function acessoMembros(arrayGerentes) {
     do {
         var usuario = prompt("Digite seu email: ");
@@ -19,8 +20,7 @@ function acessoMembros(arrayGerentes) {
         };
         var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
-        var inputSenha = parseInt(prompt("Senha da conta: "));
-        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha || indiceUsuarioMembro == -1) {
+        if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
             console.log("\nUsuário ou senha inválidos, operação reiniciada\n");
             continue;
         }
@@ -32,39 +32,37 @@ function login(arraycontasPF, arraycontasPJ) {
     do {
         var usuario = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         var tamanho = usuario.toString().length;
-        var tipoConta_1 = void 0;
-        var indiceConta_1 = void 0;
         if (tamanho == 11) {
-            tipoConta_1 = "PF";
+            tipoConta = "PF";
             var procuraConta = function (cpf, arraycontas) {
                 return arraycontas.findIndex(function (PF) { return PF.cpf === cpf; });
             };
-            indiceConta_1 = procuraConta(usuario, arraycontasPF);
-            if (indiceConta_1 == -1) {
+            indiceConta = procuraConta(usuario, arraycontasPF);
+            if (indiceConta === -1) {
                 console.log("\nConta não existente\n");
                 continue;
             }
             else {
                 var inputSenha = parseInt(prompt("Senha da conta: "));
-                if (arraycontasPF[indiceConta_1].senha !== inputSenha) {
+                if (arraycontasPF[indiceConta].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
                 }
             }
         }
         else if (tamanho == 14) {
-            tipoConta_1 = "PJ";
+            tipoConta = "PJ";
             var procuraConta = function (cnpj, arraycontas) {
                 return arraycontas.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
             };
-            indiceConta_1 = procuraConta(usuario, arraycontasPJ);
-            if (indiceConta_1 == -1) {
+            indiceConta = procuraConta(usuario, arraycontasPJ);
+            if (indiceConta === -1) {
                 console.log("\nConta não existente\n");
                 continue;
             }
             else {
                 var inputSenha = parseInt(prompt("Senha da conta: "));
-                if (arraycontasPJ[indiceConta_1].senha !== inputSenha) {
+                if (arraycontasPJ[indiceConta].senha !== inputSenha) {
                     console.log("\nSenha incorreta, operação reiniciada\n");
                     continue;
                 }
@@ -81,8 +79,6 @@ function login(arraycontasPF, arraycontasPJ) {
 var arraycontasPF = [];
 var arraycontasPJ = [];
 var arrayGerentes = [];
-var tipoConta = '\0';
-var indiceConta = 0;
 var valorTransferecia = 0;
 //! Criação de usuários
 var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
@@ -177,7 +173,7 @@ do {
                             return arraycontas.findIndex(function (PF) { return PF.cpf === cpf; });
                         };
                         indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPF);
-                        if (indiceConta == -1) {
+                        if (indiceContaRecebe === -1) {
                             console.log("\nConta não existente\n");
                             continue;
                         }
@@ -198,7 +194,7 @@ do {
                             return arraycontas.findIndex(function (PJ) { return PJ.cnpj === cnpj; });
                         };
                         indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPJ);
-                        if (indiceConta == -1) {
+                        if (indiceContaRecebe === -1) {
                             console.log("\nConta não existente\n");
                             continue;
                         }
@@ -215,14 +211,14 @@ do {
                         arraycontasPJ[indiceContaRecebe].deposito(arraycontasPJ, indiceContaRecebe, valorTransferecia);
                     }
                     else {
-                        console.log("\nFizeste cagada\n");
+                        console.log("\nCPF ou CNPJ inválido\n");
                         continue;
                     }
                     break;
                 } while (true);
                 break;
             case 5:
-                // Empréstimo
+                //! Simulação de empréstimo
                 if (tipoConta === "PF") {
                     var parcelas = void 0;
                     var pedido = void 0;
@@ -241,8 +237,8 @@ do {
             case 0:
                 break;
             default:
-                console.log("Comando invalido, tente novamente");
+                console.log("Opção inválida");
                 break;
         }
-    } while (escolha != 0);
-} while (escolha1 != 0);
+    } while (escolha !== 0);
+} while (escolha1 !== 0);

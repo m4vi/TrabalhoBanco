@@ -26,7 +26,7 @@ export class PJ {
     get cnpj() {
         return this._cnpj;
     }
-
+    
     set cnpj(cnpj: number) {
         this._cnpj = cnpj;
     }
@@ -106,6 +106,8 @@ export class PJ {
         }
     }
 
+    
+    
 }
 
 export {};

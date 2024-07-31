@@ -61,19 +61,19 @@ var PF = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    PF.prototype.saque = function (contasFisicas, indice, valor) {
-        if (contasFisicas[indice].saldo >= valor) {
-            contasFisicas[indice].saldo -= valor;
-            contasFisicas[indice]._extratoSaque.push(valor);
+    PF.prototype.saque = function (contasJuridicas, indice, valor) {
+        if (contasJuridicas[indice].saldo >= valor) {
+            contasJuridicas[indice].saldo -= valor;
+            contasJuridicas[indice]._extratoSaque.push(valor);
         }
         else {
             console.log("\nSaldo insuficiente\n");
         }
     };
-    PF.prototype.deposito = function (contasPF, indice, valor) {
-        if (!isNaN(valor) && valor > 0 && contasPF[indice]) {
-            contasPF[indice].saldo += valor;
-            contasPF[indice]._extratoDeposito.push(valor);
+    PF.prototype.deposito = function (contasPJ, indice, valor) {
+        if (!isNaN(valor) && valor > 0 && contasPJ[indice]) {
+            contasPJ[indice].saldo += valor;
+            contasPJ[indice]._extratoDeposito.push(valor);
         }
         else {
             console.log("Depósito Inválido");

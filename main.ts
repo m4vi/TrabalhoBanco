@@ -1,13 +1,14 @@
-// Importações
-
 import promptSync from 'prompt-sync'; // importa um módulo que captura entradas do usuário
 import { PF } from "./PF";
 import { PJ } from "./PJ";
-import {Gerente} from "./Gerente";
+import Gerente from "./newGerente";
 
 const prompt = promptSync(); // cria uma instância do prompt-sync
 
-//* Função para acesso de membros
+let tipoConta: string = '\0';
+let indiceConta: number = 0;
+
+//! Função para acesso de membros
 
 function acessoMembros(arrayGerentes: Gerente[]) {
     do {
@@ -21,9 +22,7 @@ function acessoMembros(arrayGerentes: Gerente[]) {
         let indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
 
-        let inputSenha = parseInt(prompt("Senha da conta: "));
-
-        if (arrayGerentes[indiceUsuarioMembro].getSenha() !== inputSenha || indiceUsuarioMembro == -1) {
+        if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
             console.log("\nUsuário ou senha inválidos, operação reiniciada\n");
             continue;
         }
@@ -33,14 +32,12 @@ function acessoMembros(arrayGerentes: Gerente[]) {
     } while (true);
 }
 
-// Função de login
+//! Função de login
 
 function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
     do {
         let usuario: number = parseInt(prompt("Digite o CPF ou CNPJ sem ponto ou traço: "));
         let tamanho: number = usuario.toString().length;
-        let tipoConta: string;
-        let indiceConta: number;
 
         if (tamanho == 11) {
             tipoConta = "PF";
@@ -51,7 +48,7 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 
             indiceConta = procuraConta(usuario, arraycontasPF);
 
-            if (indiceConta == -1) {
+            if (indiceConta === -1) {
                 console.log("\nConta não existente\n");
                 continue;
             } else {
@@ -71,7 +68,7 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 
             indiceConta = procuraConta(usuario, arraycontasPJ);
 
-            if (indiceConta == -1) {
+            if (indiceConta === -1) {
                 console.log("\nConta não existente\n");
                 continue;
             } else {
@@ -94,8 +91,6 @@ function login(arraycontasPF: PF[], arraycontasPJ: PJ[]): void {
 const arraycontasPF: PF[] = [];
 const arraycontasPJ: PJ[] = [];
 const arrayGerentes: Gerente[] = [];
-let tipoConta: string = '\0';
-let indiceConta: number = 0;
 let valorTransferecia: number = 0;
 
 //! Criação de usuários
@@ -105,36 +100,18 @@ let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
 let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-let user6: Gerente = new Gerente("Antonio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
-
+let user6: Gerente = new Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
 
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
 
-user5.adicionarContaPJ(user1);
-
-
-//------------------------------------------------------------//
-
-
 //! Menu principal
-
 
 let escolha1: number;
 let escolha: number;
 
-
-
-// user5.adicionarContaPJ(user2);
-
-
-
-//------------------------------------------------------------//
-
-
-do{
-
+do {
 
     console.log("-------------------------------------\n" +
         "|  Bem vindo ao Banco Aspili Getas  |\n" +
@@ -149,12 +126,7 @@ do{
 
     } else if (escolha1 === 2) {
         acessoMembros(arrayGerentes);
-
     } else if (escolha1 === 0) {
-
-        
-    }else if(escolha1===0){
-
         process.exit(0); // encerra o processo com código de status 0
     } else {
         console.log("\nFizeste cagada colega\n");
@@ -172,7 +144,7 @@ do{
             "| 0 Voltar\n" +
             "----------------------------");
 
-        escolha = +prompt("Escolha: >> ");
+        escolha = +prompt('Escolha: >> ');
 
         switch (escolha) {
             case 1:
@@ -225,7 +197,7 @@ do{
                         }
                         indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPF);
 
-                        if (indiceConta == -1) {
+                        if (indiceContaRecebe === -1) {
                             console.log("\nConta não existente\n");
                             continue;
                         }
@@ -250,7 +222,7 @@ do{
                         }
                         indiceContaRecebe = procuraConta(recebeTransferencia, arraycontasPJ);
 
-                        if (indiceConta == -1) {
+                        if (indiceContaRecebe === -1) {
                             console.log("\nConta não existente\n");
                             continue;
                         }
@@ -268,43 +240,43 @@ do{
                         }
 
                         arraycontasPJ[indiceContaRecebe].deposito(arraycontasPJ, indiceContaRecebe, valorTransferecia);
+
                     } else {
-                        console.log("\nFizeste cagada\n");
+                        console.log("\nCPF ou CNPJ inválido\n");
                         continue;
                     }
                     break;
-                } while (true);
 
+                } while (true);
                 break;
 
             case 5:
-                // Empréstimo
-                if (tipoConta === "PF") {
-                    let parcelas: number;
-                    let pedido: number;
+                //! Simulação de empréstimo
+                if(tipoConta==="PF"){
+                    let parcelas : number;    
+                    let pedido : number;
                     pedido = +prompt("Digite o valor a ser simulado >> ");
                     parcelas = +prompt("Digite quantas parcelas >> ");
                     arraycontasPF[indiceConta].emprestimoPF(arraycontasPF, indiceConta, pedido, parcelas);
-
-                } else if (tipoConta === "PJ") {
+    
+                }else if(tipoConta==="PJ"){
                     let parcelas : number;    
                     let pedido : number;
                     pedido = +prompt("Digite o valor a ser simulado >> ");
                     parcelas = +prompt("Digite quantas parcelas >> ");
                     arraycontasPJ[indiceConta].emprestimoPJ(arraycontasPJ, indiceConta, pedido, parcelas);
-                }
+            }
+
+
                 break;
 
             case 0:
                 break;
 
             default:
-                console.log("Comando invalido, tente novamente");
+                console.log("Opção inválida");
                 break;
         }
+    } while (escolha !== 0);
 
-    } while (escolha != 0);
-
-} while (escolha1 != 0);
-
-export {}
+} while (escolha1 !== 0);
