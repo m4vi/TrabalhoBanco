@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var prompt_sync_1 = __importDefault(require("prompt-sync")); // importa um módulo que captura entradas do usuário
 var PF_1 = require("./PF");
 var PJ_1 = require("./PJ");
-var newGerente_1 = __importDefault(require("./newGerente"));
+var Gerente_1 = require("./Gerente");
 var prompt = (0, prompt_sync_1.default)(); // cria uma instância do prompt-sync
 var tipoConta = '\0';
 var indiceConta = 0;
@@ -21,10 +21,9 @@ function acessoMembros(arrayGerentes) {
         var indiceUsuarioMembro = procuraConta(usuario, arrayGerentes);
         console.log(arrayGerentes[indiceUsuarioMembro]);
         if (indiceUsuarioMembro === -1 || arrayGerentes[indiceUsuarioMembro].getSenha() !== senha) {
-            console.log("\nUsuário ou senha inválidos, operação reiniciada\n");
             continue;
         }
-        break;
+        console.log(arrayGerentes[indiceUsuarioMembro]);
     } while (true);
 }
 //! Função de login
@@ -85,11 +84,13 @@ var user1 = new PJ_1.PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 var user2 = new PJ_1.PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 var user3 = new PF_1.PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
 var user4 = new PF_1.PF("Che Quer vara", 99887766554, 2222, 4, 120);
-var user5 = new newGerente_1.default("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922);
-var user6 = new newGerente_1.default("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923);
+var user5 = new Gerente_1.Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922, [], []);
+var user6 = new Gerente_1.Gerente("ntoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923, [], []);
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
 arrayGerentes.push(user5, user6);
+user5.adicionarContaPJ(user1);
+user5.adicionarContaPF(user3);
 //! Menu principal
 var escolha1;
 var escolha;
