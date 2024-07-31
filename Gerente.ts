@@ -6,15 +6,15 @@ export class Gerente{
     private _email: string;
     private _senha: number;
     private _numeroContato: number;
-    private _contasPF: PF[];
-    private _contasPJ: PJ[];
+    private _contasPF: PF[]=[];
+    private _contasPJ: PJ[]=[];
+    
 
     constructor(nome: string, email: string, senha: number, numeroContato: number){
         this._nome = nome;
         this._email = email;
         this._senha = senha;
         this._numeroContato = numeroContato;
-        this._
     }
 
     public getNome(): string{
@@ -49,19 +49,40 @@ export class Gerente{
         this._numeroContato = numeroContato;
     }
 
+    public getContaPF(numeroConta: number): PF | undefined {
+        return this._contasPF.find(conta => conta.numeroConta === numeroConta);
+    }
 
-    public adicionarContaPF(numeroConta: PF) {
-        return this._contasPF.push(numeroConta);
+    public adicionarContaPF(conta: PF) {
+        this._contasPF.push(conta);
     }
 
 
-    public getContaPJ(numeroConta: number) {
-        return this._contasPF[numeroConta];
+
+    // public adicionarContaPF(numeroConta: PF) {
+    //     return this._contasPF.push(numeroConta);
+    // }
+
+
+    // public getContaPJ(numeroConta: number) {
+    //     return this._contasPF[numeroConta];
+    // }
+
+    public getContaPJ(numeroConta: number): PJ | undefined {
+        return this._contasPJ.find(conta => conta.numeroConta === numeroConta);
     }
 
-    public adicionarContaPJ(numeroConta: PJ) {
+    public adicionarContaPJ(conta: PJ) {
+        this._contasPJ.push(conta);
+    }
+
+    public listarContasPJ(): PJ[] {
+        return this._contasPJ;
+    }
+
+    /*public adicionarContaPJ(numeroConta: PJ) {
         return this._contasPJ.push(numeroConta);
-    }
+    }*/
 
     public removerContaPF(numeroConta: number): void {
         const novoArray: PF[] = [];
