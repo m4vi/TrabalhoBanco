@@ -6,14 +6,15 @@ export class Gerente{
     private _email: string;
     private _senha: number;
     private _numeroContato: number;
-    private _contasPF: PF[]=[];
-    private _contasPJ: PJ[]=[];
+    private _contasPF: PF[];
+    private _contasPJ: PJ[];
 
     constructor(nome: string, email: string, senha: number, numeroContato: number){
         this._nome = nome;
         this._email = email;
         this._senha = senha;
         this._numeroContato = numeroContato;
+        this._
     }
 
     public getNome(): string{
