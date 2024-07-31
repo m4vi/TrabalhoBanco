@@ -135,6 +135,7 @@ function menuMembros() {
                 numberConta = +prompt("Digite o número da conta que deseja adicionar");
                 tamanhoNumber = numberConta.toString().length;
 
+<<<<<<< Updated upstream
                 if (tamanhoNumber == 11) {
                     const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
                         return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
@@ -241,6 +242,52 @@ function menuMembros() {
 
 //! Função menu de clientes
 function menuClientes() {
+=======
+arraycontasPJ.push(user1, user2);
+arraycontasPF.push(user3, user4);
+arrayGerentes.push(user5, user6);
+let user5: Gerente= new Gerente("Pintoncio da silva","pindamonhaga@asp.com.br",12345678,40028922);
+
+
+//------------------------------------------------------------//
+
+//! Menu principal
+
+let escolha1: number;
+let escolha: number;
+
+
+// user5.adicionarContaPJ(user2);
+
+
+
+//------------------------------------------------------------//
+
+
+do{
+
+    console.log("-------------------------------------\n" +
+        "|  Bem vindo ao Banco Aspili Getas  |\n" +
+        "|  1 Login\n" +
+        "|  2 Sou membro\n" +
+        "|  0 Sair\n");
+
+    escolha1 = +prompt("Digite a opção desejada: ");
+
+    if (escolha1 === 1) {
+        login(arraycontasPF, arraycontasPJ);
+
+    } else if (escolha1 === 2) {
+        acessoMembros(arrayGerentes);
+        
+    }else if(escolha1===0){
+        process.exit(0); // encerra o processo com código de status 0
+    } else {
+        console.log("\nFizeste cagada colega\n");
+    }
+
+    //! Menu secundário
+>>>>>>> Stashed changes
 
     let escolha: number = -1;
     do {
