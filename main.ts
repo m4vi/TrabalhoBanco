@@ -22,8 +22,8 @@ let indiceUsuarioMembro:number=0;
 let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
 let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
 let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
-let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
-let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
+let user4: PF = new PF("Pedro Alcantara", 99887766554, 2222, 4, 120);
+let user5: Gerente = new Gerente("Hellen Camargo", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
 let user6: Gerente = new Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
 
 arraycontasPJ.push(user1, user2);
