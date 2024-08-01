@@ -51,17 +51,16 @@ export class Gerente{
         this._numeroContato = numeroContato;
     }
 
-    public getContaPF(numeroConta: number): PF | undefined {
-        return this._contasPF.find(conta => conta.numeroConta === numeroConta);
+    getContasPF(): PF[] {
+        return this._contasPF;
+    }
+
+    getContasPJ(): PJ[] {
+        return this._contasPJ;
     }
 
     public adicionarContaPF(conta: PF) {
         this._contasPF.push(conta);
-    }
-
-
-    public getContaPJ(numeroConta: number): PJ | undefined {
-        return this._contasPJ.find(conta => conta.numeroConta === numeroConta);
     }
 
 

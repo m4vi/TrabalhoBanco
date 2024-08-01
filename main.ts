@@ -19,12 +19,12 @@ let indiceUsuarioMembro:number=0;
 
 //! Criação de usuários
 
-let user1: PJ = new PJ("Mao Tse Tung", 12345678912345, 1234, 1, 850);
+let user1: PJ = new PJ("Maotun", 12345678912345, 1234, 1, 850);
 let user2: PJ = new PJ("JK Kennedy", 10203040506070, 4321, 2, 1345);
-let user3: PF = new PF("Jucelino Cu de Cheque", 11223344556, 1111, 3, 31000);
-let user4: PF = new PF("Che Quer vara", 99887766554, 2222, 4, 120);
-let user5: Gerente = new Gerente("Pintoncio da silva", "pindamonhaga@asp.com.br", 12345678, 40028922,[],[]);
-let user6: Gerente = new Gerente("Antoncio da silva", "ndamonhaga@asp.com.br", 32345678, 40028923,[],[]);
+let user3: PF = new PF("Jucelino", 11223344556, 1111, 3, 31000);
+let user4: PF = new PF("Adolfo", 99887766554, 2222, 4, 120);
+let user5: Gerente = new Gerente("Paul Matos", "paul@asp.com.br", 12345678, 40028922,[],[]);
+let user6: Gerente = new Gerente("Antoncio da silva", "anton@asp.com.br", 32345678, 40028923,[],[]);
 
 arraycontasPJ.push(user1, user2);
 arraycontasPF.push(user3, user4);
@@ -105,23 +105,110 @@ function login(): void {
     } while (true);
 }
 
+//*Função para adicionar conta ao gerente
+function adicionarContaAoGerente() {
+    let numberConta = +prompt("Digite o número da conta que deseja adicionar: ");
+    let contaEncontrada = false;
+
+    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+    };
+
+    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+    };
+
+    let indiceNumberPF = procuraContaPF(numberConta, arraycontasPF);
+    if (indiceNumberPF !== -1) {
+        arrayGerentes[indiceUsuarioMembro].adicionarContaPF(arraycontasPF[indiceNumberPF]);
+        contaEncontrada = true;
+    }
+
+    let indiceNumberPJ = procuraContaPJ(numberConta, arraycontasPJ);
+    if (indiceNumberPJ !== -1) {
+        arrayGerentes[indiceUsuarioMembro].adicionarContaPJ(arraycontasPJ[indiceNumberPJ]);
+        contaEncontrada = true;
+    }
+
+    if (!contaEncontrada) {
+        console.log("\nConta não existente, operação reiniciada\n");
+    } else {
+        console.log("\nConta adicionada com sucesso!\n");
+    }
+}
+
+//! Função para exibir extrato do cliente
+function exibirExtratoCliente() {
+    let numberConta = +prompt("Digite o número da conta para ver o extrato: ");
+    let contaEncontrada = false;
+
+    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+    };
+
+    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+    };
+
+    let indiceNumberPF = procuraContaPF(numberConta, arraycontasPF);
+    if (indiceNumberPF !== -1) {
+        arraycontasPF[indiceNumberPF].infoPF(arraycontasPF, indiceNumberPF);
+        contaEncontrada = true;
+    }
+
+    let indiceNumberPJ = procuraContaPJ(numberConta, arraycontasPJ);
+    if (indiceNumberPJ !== -1) {
+        arraycontasPJ[indiceNumberPJ].infoPJ(arraycontasPJ, indiceNumberPJ);
+        contaEncontrada = true;
+    }
+
+    if (!contaEncontrada) {
+        console.log("\nConta não existente\n");
+    }
+}
+
+//! Função para remover conta
+function removerConta() {
+    let numberConta = +prompt("Digite o número da conta que deseja remover: ");
+    let contaEncontrada = false;
+
+    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
+        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
+    };
+
+    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
+        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
+    };
+
+    let indiceNumberPF = procuraContaPF(numberConta, arraycontasPF);
+    if (indiceNumberPF !== -1) {
+        arraycontasPF.splice(indiceNumberPF, 1);
+        contaEncontrada = true;
+    }
+
+    let indiceNumberPJ = procuraContaPJ(numberConta, arraycontasPJ);
+    if (indiceNumberPJ !== -1) {
+        arraycontasPJ.splice(indiceNumberPJ, 1);
+        contaEncontrada = true;
+    }
+
+    if (!contaEncontrada) {
+        console.log("\nConta não existente\n");
+    } else {
+        console.log("\nConta removida com sucesso!\n");
+    }
+}
+
 //! Função menu de membros
 function menuMembros() {
     let escolha: number = -1;
-    let numberConta: number = 0;
-    let tamanhoNumber: number = 0;
-    let indiceNumber: number = 0;
 
     do {
-        numberConta= 0;
-        tamanhoNumber= 0;
-        indiceNumber= 0;
         console.log("----------------------------\n" +
-            "| 1 Criar conta\n" +
-            "| 2 Adicionar conta aos cuidados\n" +
-            "| 3 Extrato de cliente\n" +
-            "| 4 Listar clientes\n" +
-            "| 5 Excluir conta\n" +
+            "| 1 Adicionar conta aos cuidados\n" +
+            "| 2 Extrato de cliente\n" +
+            "| 3 Listar clientes\n" +
+            "| 4 Remover conta"+
             "| 0 Voltar\n" +
             "----------------------------");
 
@@ -129,106 +216,17 @@ function menuMembros() {
 
         switch (escolha) {
             case 1:
-                //criação de conta aqui
+                adicionarContaAoGerente();
                 break;
             case 2:
-                numberConta = +prompt("Digite o número da conta que deseja adicionar");
-                tamanhoNumber = numberConta.toString().length;
-
-                if (tamanhoNumber == 11) {
-                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
-                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-
-                } else if (tamanhoNumber == 14) {
-                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
-                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-                }
-
-                // TODO: Adicionar a função de adicionar cliente aqui
-
+                exibirExtratoCliente();
                 break;
             case 3:
-                numberConta = +prompt("Digite o número da conta que deseja remover");
-                tamanhoNumber = numberConta.toString().length;
-
-                if (tamanhoNumber == 11) {
-                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
-                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-
-                    // TODO: Adicionar a função de extrato aqui
-
-                } else if (tamanhoNumber == 14) {
-                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
-                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-
-                    // TODO: Adicionar a função de extrato aqui
-
-                }
-                break;
-            case 4:
                 arrayGerentes[indiceUsuarioMembro].listarContasPJ();
                 arrayGerentes[indiceUsuarioMembro].listarContasPF();
                 break;
-            case 5:
-                numberConta = +prompt("Digite o número da conta que deseja remover");
-                tamanhoNumber = numberConta.toString().length;
-
-                if (tamanhoNumber == 11) {
-                    const procuraContaPF = (numConta: number, arraycontas: PF[]): number => {
-                        return arraycontas.findIndex((PF) => PF.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPF(numberConta, arraycontasPF);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-
-                    // TODO: Adicionar a função de remover aqui
-
-                } else if (tamanhoNumber == 14) {
-                    const procuraContaPJ = (numConta: number, arraycontas: PJ[]): number => {
-                        return arraycontas.findIndex((PJ) => PJ.numeroConta === numConta);
-                    };
-
-                    indiceNumber = procuraContaPJ(numberConta, arraycontasPJ);
-                    if (indiceNumber === -1) {
-                        console.log("\nConta não existente, operação reiniciada\n");
-                        continue;
-                    }
-
-                    // TODO: Adicionar a função de remover aqui
-
-                }
-                break;
+            case 4:
+                removerConta();
             case 0:
                 break;
             default:
@@ -250,6 +248,7 @@ function menuClientes() {
             "| 3 Extrato\n" +
             "| 4 Transferencia\n" +
             "| 5 Simular emprestimo\n" +
+            "| 6 Obter dados do gerente"+
             "| 0 Voltar\n" +
             "----------------------------");
 
@@ -379,6 +378,43 @@ function menuClientes() {
 
                 break;
 
+            case 6:
+                //acesso de dados do gerente pelo cliente
+                //! Acesso de dados do gerente pelo cliente
+                let gerenteEncontrado = false;
+
+                if (tipoConta === "PF") {
+                    for (let gerente of arrayGerentes) {
+                        for (let conta of gerente.getContasPF()) {
+                            if (conta.cpf === arraycontasPF[indiceConta].cpf) {
+                                console.log(`Nome do Gerente: ${gerente.getNome()}`);
+                                console.log(`Email do Gerente: ${gerente.getEmail()}`);
+                                console.log(`Telefone do Gerente: ${gerente.getNumeroContato()}`);
+                                gerenteEncontrado = true;
+                                break;
+                            }
+                        }
+                        if (gerenteEncontrado) break;
+                    }
+                } else if (tipoConta === "PJ") {
+                    for (let gerente of arrayGerentes) {
+                        for (let conta of gerente.getContasPJ()) {
+                            if (conta.cnpj === arraycontasPJ[indiceConta].cnpj) {
+                                console.log(`Nome do Gerente: ${gerente.getNome()}`);
+                                console.log(`Email do Gerente: ${gerente.getEmail()}`);
+                                console.log(`Telefone do Gerente: ${gerente.getNumeroContato()}`);
+                                gerenteEncontrado = true;
+                                break;
+                            }
+                        }
+                        if (gerenteEncontrado) break;
+                    }
+                }
+
+                if (!gerenteEncontrado) {
+                    console.log("Não há gerente responsável por esta conta.");
+                }
+                break;
             case 0:
 
                 break;

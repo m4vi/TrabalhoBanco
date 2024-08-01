@@ -34,14 +34,14 @@ var Gerente = /** @class */ (function () {
     Gerente.prototype.setNumeroContato = function (numeroContato) {
         this._numeroContato = numeroContato;
     };
-    Gerente.prototype.getContaPF = function (numeroConta) {
-        return this._contasPF.find(function (conta) { return conta.numeroConta === numeroConta; });
+    Gerente.prototype.getContasPF = function () {
+        return this._contasPF;
+    };
+    Gerente.prototype.getContasPJ = function () {
+        return this._contasPJ;
     };
     Gerente.prototype.adicionarContaPF = function (conta) {
         this._contasPF.push(conta);
-    };
-    Gerente.prototype.getContaPJ = function (numeroConta) {
-        return this._contasPJ.find(function (conta) { return conta.numeroConta === numeroConta; });
     };
     Gerente.prototype.adicionarContaPJ = function (conta) {
         this._contasPJ.push(conta);
